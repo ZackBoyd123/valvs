@@ -1,0 +1,3 @@
+Threads	10
+Kraken	/home2/
+Contamination	/home2/
