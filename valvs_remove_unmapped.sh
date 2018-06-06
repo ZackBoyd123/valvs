@@ -23,11 +23,11 @@ then
 
 fi
 
-
+. valvs_config.txt
 
 if [ -z $OPT_T ]
     then
-    OPT_T=10
+    OPT_T=$config_num_threads
 fi
 if [ -z $OPT_B ]
     then
@@ -37,7 +37,7 @@ fi
 OPT_O=${OPT_B%.bam}.v2.bam
 
 echo "BAM = ${OPT_B}"
-echo "$(date) valvs_remove_unmapped.sh b=$OPT_B" >> $LOG
+echo "$(date) $config_version_number valvs_remove_unmapped.sh b=$OPT_B" >> $LOG
 
 samtools view -@ $OPT_T -bh -F 4 $OPT_B > $OPT_O
 mv $OPT_O $OPT_B

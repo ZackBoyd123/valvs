@@ -23,7 +23,7 @@ then
 
 fi
 
-
+. valvs_config.txt
 
 if [ -z $OPT_1 ]
 then
@@ -35,7 +35,7 @@ then
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2}"
-echo "$(date) valvs_readstats.sh 1=$OPT_1 2=$OPT_2" >> $LOG
+echo "$(date) $config_version_number valvs_readstats.sh 1=$OPT_1 2=$OPT_2" >> $LOG
 
 R1=$(expr `(wc -l ${OPT_1} | cut -f1 -d " ")` / 4)
 R2=$(expr `(wc -l ${OPT_2} | cut -f1 -d " ")` / 4)

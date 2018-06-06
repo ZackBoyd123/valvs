@@ -26,7 +26,7 @@ then
 fi
 
 
-
+. valvs_config.txt
 if [ -z $OPT_1 ]
 then
 	OPT_1=${FLD}_R1_valvs.fq
@@ -43,6 +43,6 @@ else
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} e = ${OPT_E}"
-echo "$(date) valvs_spades.sh 1=$OPT_1 2=$OPT_2 e=$OPT_E" >> $LOG
+echo "$(date) $config_version_number valvs_spades.sh 1=$OPT_1 2=$OPT_2 e=$OPT_E" >> $LOG
 
 spades.py $OPT_E -t 10 -1 $OPT_1 -2 $OPT_2 -o ./SpadesOutput

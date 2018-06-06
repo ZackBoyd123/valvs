@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-
 import sys
-
 fileIn = sys.argv[1]
 fileOut = sys.argv[2]
 

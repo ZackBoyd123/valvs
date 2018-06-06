@@ -27,7 +27,7 @@ then
 
 fi
 
-
+. valvs_config.txt
 
 
 if [ -z $OPT_1 ] 
@@ -40,7 +40,7 @@ then
 fi
 if [ -z $OPT_T ] 
 then
-	OPT_T=10
+	OPT_T=$config_num_threads
 fi
 if [ -z $OPT_O ]
 then
@@ -48,9 +48,9 @@ then
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} Output = ${OPT_O}"
-echo "$(date) valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O" >> $LOG
+echo "$(date) $config_version_number valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O" >> $LOG
 
 #RJO - valvs_path
-kraken --db /home2/db/kraken/Alpha_Kraken_GB_DB --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
-kraken-report -db /home2/db/kraken/MiniDB ${OPT_O}_kraken.txt > ${OPT_O}_kraken_report.txt
+kraken --db $config_kraken_db"Alpha_Kraken_GB_DB" --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
+kraken-report -db $config_kraken_db"MiniDB" ${OPT_O}_kraken.txt > ${OPT_O}_kraken_report.txt
 ktImportTaxonomy -q 2 -t 3 -s 4 ${OPT_O}_kraken.txt -o ${OPT_O}_kraken.html

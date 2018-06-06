@@ -31,7 +31,7 @@ fi
 
 pwd=`pwd`
 . valvs_checkref.sh
-
+. valvs_config.txt
 if [ -z $OPT_1 ]
 then
 	OPT_1=$FLD"_R1_valvs.fq"
@@ -46,7 +46,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) valvs_gem.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
+echo "$(date) $config_version_number valvs_gem.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
 
 check=$(dirname $OPT_R)
 file=$(basename $OPT_R)

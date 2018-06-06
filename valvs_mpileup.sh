@@ -27,6 +27,7 @@ fi
 
 pwd=`pwd`
 . valvs_checkref.sh
+. valvs_config.txt
 
 if [ -z $OPT_B ]
 then
@@ -34,7 +35,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} BAM = ${OPT_B}"
-echo "$(date) valvs_mpileup.sh r=$OPT_R b=$OPT_B" >> $LOG
+echo "$(date) $config_version_number valvs_mpileup.sh r=$OPT_R b=$OPT_B" >> $LOG
 
 samtools mpileup -B -d 100000000 -A -q 0 -Q 0 -C 0 -f $OPT_R $OPT_B > ${OPT_B%.bam}"_mpileup.txt"
 

@@ -30,6 +30,7 @@ fi
 
 pwd=`pwd`
 . valvs_checkref.sh
+. valvs_config.txt
 
 if [ -z $OPT_B ]
 then
@@ -41,7 +42,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} BAM = ${OPT_B} Stub = ${OPT_O}"
-echo "$(date) valvs_diversitools.sh r=$OPT_R b=OPT_B" o=${OPT_O} >> $LOG
+echo "$(date) $config_version_number valvs_diversitools.sh r=$OPT_R b=OPT_B" o=${OPT_O} >> $LOG
 
 #RJO - valvs_path
 ~orto01r/dist/diversiutils_linux -bam $OPT_B -ref $OPT_R -stub $OPT_O

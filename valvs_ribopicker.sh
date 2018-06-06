@@ -25,7 +25,7 @@ then
 
 fi
 
-
+. valvs_config.txt
 
 if [ -z $OPT_1 ]
 then
@@ -37,11 +37,11 @@ then
 fi
 if [ -z $OPT_T ]
 then
-        OPT_T=10
+        OPT_T=$config_num_threads
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} T = ${OPT_T}"
-echo "$(date) valvs_ribopicker.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T" >> $LOG
+echo "$(date) $config_version_number valvs_ribopicker.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T" >> $LOG
 
 #Interleave the two fastq files into 1 file - as ribo picker does not do paired end
 java -jar ~orto01r/dist/ortools.jar -i ${OPT_1} ${OPT_2} valvs_unmap

@@ -27,7 +27,7 @@ then
 
 fi
 
-
+. valvs_config.txt
 
 if [ -z $OPT_1 ] 
 then
@@ -39,18 +39,18 @@ then
 fi
 if [ -z $OPT_Q ] 
 then
-	OPT_Q=1
+	OPT_Q=$config_trim_quality
 fi
 if [ -z $OPT_L ]
 then
-	OPT_L=1
+	OPT_L=$config_trim_length
 fi
 
 
 echo "4 $OPT_L"
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} q = ${OPT_Q} l = ${OPT_L}"
-echo "$(date) valvs_trim_galore.sh 1=$OPT_1 2=$OPT_2 q=$OPT_Q l=$OPT_L" >> $LOG
+echo "$(date) $config_version_number valvs_trim_galore.sh 1=$OPT_1 2=$OPT_2 q=$OPT_Q l=$OPT_L" >> $LOG
 
 trim_galore -q $OPT_Q --dont_gzip --length $OPT_L --paired "$OPT_1" "$OPT_2"
 

@@ -53,7 +53,10 @@ then
 else
 	echo "Please specify your reference as a full or relative path"
 	#RJO - should we exit?
+	exit 1
 fi
+
+. valvs_config.txt
 
 if [ -z $OPT_1 ]
     then
@@ -73,7 +76,7 @@ else
         R2=${OPT_O}_R2_valvs.fq
 fi
 echo "Ref = $OPT_R R1 = $OPT_1 R2 = $OPT_2 StubOutput = $OPT_O"
-echo "$(date) valvs_host.sh r=$OPT_R o=$OPT_O 1=$OPT_1 2=$OPT_2" >> $LOG
+echo "$(date) $config_version_number valvs_host.sh r=$OPT_R o=$OPT_O 1=$OPT_1 2=$OPT_2" >> $LOG
 
 valvs_bowtie2.sh -r $OPT_R -o ${OPT_O}.sam -1 $OPT_1 -2 $OPT_2
 valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2

@@ -1,3 +1,11 @@
-Threads	10
-Kraken	/home2/
-Contamination	/home2/
+#!/bin/bash
+config_num_threads=4
+config_kraken_db=/home2/kraken/
+config_contam_db=/home2/db/valvs/contam/
+config_diamond_db=/home/db/diamond/
+config_ribo_db=/home2/
+config_trim_quality=20
+config_trim_length=20
+config_version_number=valvs1.0
+config_picard_install=/home1/orto01r/programs/picard.jar
+config_varscan_install=/software/bin/VarScan.v2.3.7.jar

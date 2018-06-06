@@ -35,6 +35,7 @@ fi
 
 pwd=`pwd`
 . valvs_checkref.sh
+. valvs_config.txt
 
 if [ -z $OPT_1 ]
 then
@@ -46,7 +47,7 @@ then
 fi
 if [ -z $OPT_T ] 
 then
-	OPT_T=10
+	OPT_T=$config_num_threads
 fi
 if [ -z $OPT_M ] 
 then
@@ -58,7 +59,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = $OPT_O"
-echo "$(date) valvs_bowtie2.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
+echo "$(date) $config_version_number valvs_bowtie2.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
 
 #Check if bt2 indexes already exist.
 check=$(dirname $OPT_R)

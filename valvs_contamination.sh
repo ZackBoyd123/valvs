@@ -27,6 +27,7 @@ then
 
 fi
 
+. valvs_config.txt
 
 if [ -z $OPT_1 ]
 then
@@ -47,10 +48,10 @@ else
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) valvs_contamination.sh 1=${OPT_1} 2=${OPT_2} o=${OPT_O}" >> $LOG
+echo "$(date) $config_version_number valvs_contamination.sh 1=${OPT_1} 2=${OPT_2} o=${OPT_O}" >> $LOG
 
 #RJO - valvs_path
-valvs_bowtie2.sh -r /home2/db/valvs/contam/contams.fa -1 $OPT_1 -2 $OPT_2 -o "$OPT_O.sam"
+valvs_bowtie2.sh -r $config_contam_db -1 $OPT_1 -2 $OPT_2 -o "$OPT_O.sam"
 samtools idxstats ${OPT_O}.bam >> $LOG
 valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2
 

@@ -25,6 +25,8 @@ then
 
 fi
 
+. valvs_config.txt
+
 if [ -z $OPT_B ]
 then
 	OPT_B=${FLD}.bam
@@ -39,10 +41,12 @@ then
 fi
 
 echo "BAM = ${OPT_B} R1out = ${OPT_1} R2out = ${OPT_2}"
-echo "$(date) valvs_extract_unmapped.sh b=$OPT_B" 1=${OPT_1} 2=${OPT_2} >> $LOG
+echo "$(date) $config_version_number valvs_extract_unmapped.sh b=$OPT_B" 1=${OPT_1} 2=${OPT_2} >> $LOG
 
 #RJO - valvs_path
-java -jar /home1/orto01r/programs/picard.jar SamToFastq I=$OPT_B FASTQ=${OPT_1} SECOND_END_FASTQ=${OPT_2}
+#ZB added picard install path to jar file
+java -jar $config_picard_install SamToFastq I=$OPT_B FASTQ=$OPT_1 SECOND_END_FASTQ=$OPT_2
+#/home1/orto01r/programs/picard.jar SamToFastq I=$OPT_B FASTQ=${OPT_1} SECOND_END_FASTQ=${OPT_2}
 
 valvs_readstats.sh
 

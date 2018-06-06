@@ -24,14 +24,14 @@ then
 fi
 
 
-
+. valvs_config.txt
 if [ -z $OPT_B ] 
 then
 	OPT_B=${FLD}".bam"
 fi
 
 echo "BAM file = ${OPT_B}"
-echo "$(date) valvs_vphaser.sh b=$OPT_B" >> $LOG
+echo "$(date) $config_version_number valvs_vphaser.sh b=$OPT_B" >> $LOG
 
 variant_caller -i $OPT_B -o ./
 
@@ -39,8 +39,7 @@ if [ -n $OPT_D ]
 then
     mkdir -p VPhaserOutput
     #RJO - need to move vphaser files into here - maybe keep the key variant file in the folder though?
-    prefix=$(samtools view $OPT_B | head -1 | awk '{print $3}')
-    for i in $(ls | grep $prefix | grep -v $prefix".1.var.raw.txt")
+    for i in $(ls | grep ".region")
     do
         mv $i VPhaserOutput
     done

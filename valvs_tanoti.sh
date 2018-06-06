@@ -32,6 +32,7 @@ fi
 
 pwd=`pwd`
 . valvs_checkref.sh
+. valvs_config.txt
 
 if [ -z $OPT_1 ]
 then
@@ -47,7 +48,7 @@ then
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) valvs_tanoti.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O" >> $LOG
+echo "$(date) $config_version_number valvs_tanoti.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O" >> $LOG
 
 tanoti -r $OPT_R -i "$OPT_1" "$OPT_2" -o ${OPT_O}.sam -p 1
 
