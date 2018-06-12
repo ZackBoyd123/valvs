@@ -8,6 +8,7 @@ touch $LOG
 
 while getopts :r:1:2:t:m:o: TEST; do
 	case $TEST in 
+
 	r) OPT_R=$OPTARG
 	;;
 	1) OPT_1=$OPTARG
@@ -23,7 +24,7 @@ while getopts :r:1:2:t:m:o: TEST; do
 	esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 == "-h" ]]
 then
 	printf "\t----${0##*/}----\n\t[-r]\tReference file\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-t]\tThreads\n\t[-m]\tAlignment Mode\n\t[-o]\tOutputStub\n"
 	exit 1
@@ -62,13 +63,18 @@ check=$(dirname $OPT_R)
 file=`awk -F "/" '{print $NF}' <<< $OPT_R`
 tocheck=$check/$file".1.bt2"
 
-echo "Looing for $tocheck to check indexes..."
 if [ -e "$tocheck" ]
 then
 	:
 else
-	echo "Couldn't find bowtie indexes -  indexing...."
-	bowtie2-build $OPT_R $OPT_R
+	tocheck=$check/$file".1.bt2l"
+	if [ -e "$tocheck" ]
+	then
+		:
+	else
+		echo "Couldn't find bowtie indexes -  indexing...."
+		bowtie2-build $OPT_R $OPT_R
+	fi
 fi
 
 bowtie2 --"$OPT_M" -p $OPT_T -x $OPT_R -1 $OPT_1 -2 $OPT_2 -S ${OPT_O}.sam

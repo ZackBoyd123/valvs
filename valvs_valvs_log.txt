@@ -1,1 +1,2 @@
-Tue 12 Jun 2018 22:39:19 BST valvs1.0 valvs_consensus.sh b=valvs.bam r=OPT_R
+Wed 13 Jun 2018 00:19:10 BST valvs1.0 valvs_bowtie2.sh r=/Users/rjorton/git/valvs/valvs_ref.fa 1=valvs_R1_valvs.fq 2=valvs_R2_valvs.fq o=valvs t=10 m=local
+Wed 13 Jun 2018 00:20:08 BST valvs1.0 valvs_bowtie2.sh r=/Users/rjorton/git/valvs/valvs_ref.fa 1=valvs_R1_valvs.fq 2=valvs_R2_valvs.fq o=valvs t=10 m=local

@@ -10,7 +10,7 @@ then
 fi
 
 firstchar="${OPT_R:0:1}"
-if [ "$firstchar" == "/" ] || [ "$firstchar" == "~" ]
+if  [ "$firstchar" == "." ] || [ "$firstchar" == "/" ] || [ "$firstchar" == "~" ]
 then
 	:
 else
