@@ -1,24 +1,32 @@
 #!/bin/bash
-valvs_makefolders.sh
+
+#$1=valvs script to run in each folder
+
+echo "valvs_loop"
+
+FLD=${PWD##*/}
+LOG="${FLD}_valvs_loop.txt"
+touch $LOG
+
+while getopts :v: TEST; do
+        case $TEST in 
+        
+        v) OPT_V=$OPTARG
+        ;;
+done
+
+if [ -z $OPT_V ]
+then
+        OPT_V=valvs_default.sh
+fi
+
 for i in $(ls -d */ | grep -v Undetermined | grep -v seqrun)
-	do echo $i
+do 
+	echo $i
+
 	cd $i
 	
-	valvs_trim_galore.sh
-	valvs_kraken.sh
-	valvs_contamination.sh
-	valvs_host.sh -r /home2/db/bowtie2/hg38
-	valvs_bwa.sh
-	valvs_readstats.sh
-	valvs_mpileup.sh
-	valvs_lofreq.sh
-	valvs_vphaser.sh
-#	put
-#	scripts
-#	in
-#	here
-#
-#
+	$OPT_V
 
 	cd ../
 done

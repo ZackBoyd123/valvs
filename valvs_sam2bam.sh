@@ -20,7 +20,7 @@ done
 
 if [ $1 = "-h" ]
 then
-        printf "\t----${0##*/}----\n\t[-s]\tInput SAM File\n\t[-t]\tNumber of Threads to Use\n\t[-o]\tOutput File Name\n"
+        printf "\t----${0##*/}----\n\t[-s]\tInput SAM File\n\t[-t]\tNumber of Threads to Use\n\t[-o]\tOutput BAM File Name\n"
         exit 1
 
 fi
@@ -29,7 +29,7 @@ fi
 
 if [ -z $OPT_T ] 
 then
-	OPT_T=$config_num_threads
+	OPT_T=$config_threads
 fi
 if [ -z $OPT_S ]
 then
@@ -46,7 +46,7 @@ then
 fi
 
 echo "SAM = ${OPT_S} BAM = ${OPT_O}"
-echo "$(date) $config_version_number valvs_sam2bam.sh s=$OPT_S o=$OPT_O" >> $LOG
+echo "$(date) $config_version valvs_sam2bam.sh s=$OPT_S o=$OPT_O" >> $LOG
 
 samtools view -@ $OPT_T -bS $OPT_S | samtools sort -@ $OPT_T -o $OPT_O
 rm -f $OPT_S

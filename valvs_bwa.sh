@@ -42,7 +42,7 @@ then
 fi
 if [ -z $OPT_T ]
 then
-	OPT_T=$config_num_threads
+	OPT_T=$config_threads
 fi
 if [ -z $OPT_O ]
 then
@@ -50,7 +50,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) $config_version_number valvs_bwa.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
+echo "$(date) $config_version valvs_bwa.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
 
 check=$(dirname $OPT_R)
 file=`awk -F "/" '{print $NF}' <<< $OPT_R`
@@ -58,7 +58,7 @@ tocheck=$check/$file".bwt"
 
 if [ -e $tocheck ]
 then
-	echo "index exists"
+	:
 else
 	bwa index -p $OPT_R $OPT_R
 fi

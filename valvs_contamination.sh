@@ -22,7 +22,7 @@ done
 
 if [ $1 = "-h" ]
 then
-        printf "\t----${0##*/}----\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-k]\tKeep old BAM? y/n\n\t[-o]\tOutput File Name\n"
+        printf "\t----${0##*/}----\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-k]\tKeep contamination BAM? y\n\t[-o]\tOutput File Name\n"
         exit 1
 
 fi
@@ -48,10 +48,9 @@ else
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O} r = $config_contam_db"
-echo "$(date) $config_version_number valvs_contamination.sh 1=${OPT_1} 2=${OPT_2} o=${OPT_O} r=$config_contam_db" >> $LOG
+echo "$(date) $config_version valvs_contamination.sh 1=${OPT_1} 2=${OPT_2} o=${OPT_O} r=$config_contam_db" >> $LOG
 
-#RJO - valvs_path
-valvs_bowtie2.sh -r $config_contam_db -1 $OPT_1 -2 $OPT_2 -o "$OPT_O.sam"
+valvs_bowtie2.sh -r $config_contam -1 $OPT_1 -2 $OPT_2 -o "$OPT_O.sam"
 samtools idxstats ${OPT_O}.bam >> $LOG
 valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2
 

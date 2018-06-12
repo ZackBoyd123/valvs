@@ -23,7 +23,6 @@ then
 
 fi
 
-pwd=`pwd`
 . valvs_checkref.sh
 . valvs_config.txt
 
@@ -33,7 +32,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} BAM= ${OPT_B} Consensus = ${OPT_B%.bam}_samcon.fa"
-echo "$(date) $config_version_number valvs_consensus.sh b=$OPT_B r=OPT_R" >> $LOG
+echo "$(date) $config_version valvs_consensus.sh b=$OPT_B r=OPT_R" >> $LOG
 
 samtools mpileup -uf $OPT_R $OPT_B | bcftools call -c | vcfutils.pl vcf2fq > ${OPT_B%.bam}"_samcon.fq"
 valvs_samcon2fasta.py ${OPT_B%.bam}"_samcon.fq" ${OPT_B%.bam}"_samcon.fa"

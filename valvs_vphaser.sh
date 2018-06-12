@@ -16,7 +16,7 @@ done
 
 if [ $1 = "-h" ]
 then
-        printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-d]\tPut Output Files in New Directory? y/n\n"
+        printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n"
         exit 1
 
 fi
@@ -29,9 +29,11 @@ then
 fi
 
 echo "BAM file = ${OPT_B}"
-echo "$(date) $config_version_number valvs_vphaser.sh b=$OPT_B" >> $LOG
+echo "$(date) $config_version valvs_vphaser.sh b=$OPT_B" >> $LOG
 
 variant_caller -i $OPT_B -o ./
 
 mkdir -p vphaer
-mv *.REGION.* vphaser
+mv *.region vphaser
+mv *.covplot.R vphaser
+mv *.eb vphaser

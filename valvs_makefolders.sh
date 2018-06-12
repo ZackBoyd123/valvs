@@ -2,7 +2,7 @@
 
 
 #IFS=$'\n'
-greater=$(ls | grep .fa | grep -v .fastq)
+greater=$(ls | grep .f*a* | grep -v .fastq)
 if $greater -ge 2
 then
 	echo "There's more than one fasta you're trying to copy"
@@ -10,10 +10,11 @@ then
 	exit 1
 else
 	mkdir References
-	for i in $(ls | grep .fa | grep -v .fastq)
+	for i in $(ls | grep .f*a* | grep -v .fastq)
 	do
 		mv $i References
 	done
+
 	cd References 
 	ln -s * ./ref.fa
 	cd ../
@@ -30,8 +31,6 @@ mv Stats seqrun 2>/dev/null
 mkdir -p Undetermined
 mv Undetermined*.gz Undetermined 2>/dev/null
 
-
-#for fastq in *_R1_001.fastq.gz
 for fastq in *_R1_*
 do
 	echo $fastq

@@ -24,15 +24,13 @@ done
 
 if [ $1 = "-h" ]
 then
-        printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-r]\tReference File\n\t[-o]\tOutput File Name\n\t[-k]\t Keep Old Files? y/n\n"
+        printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-r]\tReference File\n\t[-o]\tOutput File Name\n\t[-k]\t Keep Old Files? y\n"
         exit 1
 
 fi
 
 
-
-
-#RJO - host ref is definite to viral so can't use checkref
+#RJO - host ref is different to viral so can't use checkref
 if [ -z $OPT_R ]
 then
 	if [ -e $PWD"/valvs_host.txt" ]
@@ -76,7 +74,7 @@ else
         R2=${OPT_O}_R2_valvs.fq
 fi
 echo "Ref = $OPT_R R1 = $OPT_1 R2 = $OPT_2 StubOutput = $OPT_O"
-echo "$(date) $config_version_number valvs_host.sh r=$OPT_R o=$OPT_O 1=$OPT_1 2=$OPT_2" >> $LOG
+echo "$(date) $config_version valvs_host.sh r=$OPT_R o=$OPT_O 1=$OPT_1 2=$OPT_2" >> $LOG
 
 valvs_bowtie2.sh -r $OPT_R -o ${OPT_O}.sam -1 $OPT_1 -2 $OPT_2
 valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2
@@ -85,5 +83,3 @@ if [ -z $OPT_K ]
 then
     rm -f ${OPT_O}.bam
 fi
-
-

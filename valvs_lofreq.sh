@@ -32,7 +32,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} BAM = ${OPT_B}"
-echo "$(date) $config_version_number valvs_lofreq.sh b=$OPT_B r=$OPT_R" >> $LOG
+echo "$(date) $config_version valvs_lofreq.sh b=$OPT_B r=$OPT_R" >> $LOG
 
 lofreq call -f $OPT_R -o ${OPT_B%.bam}".vcf" --verbose "$OPT_B"
 

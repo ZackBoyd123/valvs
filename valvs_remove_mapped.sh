@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "valvs_remove_unampped"
+echo "valvs_remove_mapped"
 
 FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
@@ -37,8 +37,8 @@ fi
 OPT_O=${OPT_B%.bam}.v2.bam
 
 echo "BAM = ${OPT_B}"
-echo "$(date) $config_version valvs_remove_unmapped.sh b=$OPT_B" >> $LOG
+echo "$(date) $config_version valvs_remove_mapped.sh b=$OPT_B" >> $LOG
 
-samtools view -@ $OPT_T -bh -F 4 $OPT_B > $OPT_O
+samtools view -@ $OPT_T -bh -f 4 $OPT_B > $OPT_O
 mv $OPT_O $OPT_B
  

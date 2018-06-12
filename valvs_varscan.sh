@@ -44,6 +44,6 @@ else
 fi
 
 echo "mpileup = ${OPT_M} Qual = $OPT_Q Freq = $OPT_F"
-echo "$(date) $config_version_number valvs_varscan.sh m=$OPT_M q=$OPT_Q f=$OPT_F" >> $LOG
+echo "$(date) $config_version valvs_varscan.sh m=$OPT_M q=$OPT_Q f=$OPT_F" >> $LOG
 
 java -jar $config_varscan mpileup2snp $OPT_M --min-avg-qual $OPT_Q -min-var-freq $OPT_F --output-vcf 1 > ${VAR}

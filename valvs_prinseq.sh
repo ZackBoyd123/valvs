@@ -35,9 +35,8 @@ then
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2}"
-echo "$(date) $config_version_number valvs_prinseq.sh 1=$OPT_1 2=$OPT_2" >> $LOG
+echo "$(date) $config_version valvs_prinseq.sh 1=$OPT_1 2=$OPT_2" >> $LOG
 
-#RJO -  Removed > prinseq_out.txt 2>&1
 prinseq-lite.pl -lc_method dust -lc_threshold 7 -derep 12345 -fastq ${OPT_1} -fastq2 ${OPT_2} -out_good prinseq_good -out_bad prinseq_bad
 
 mv prinseq_good_1.fastq ${FLD}"_R1_valvs.fq"

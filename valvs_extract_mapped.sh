@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "valvs_extract_unmapped"
+echo "valvs_extract_mapped"
 
 FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
@@ -41,9 +41,9 @@ then
 fi
 
 echo "BAM = ${OPT_B} R1out = ${OPT_1} R2out = ${OPT_2}"
-echo "$(date) $config_version valvs_extract_unmapped.sh b=$OPT_B" 1=${OPT_1} 2=${OPT_2} >> $LOG
+echo "$(date) $config_version valvs_extract_mapped.sh b=$OPT_B" 1=${OPT_1} 2=${OPT_2} >> $LOG
 
-samtools view -f4 -bh ${OPT_B} > valvs_unmapped.bam
-java -jar $config_version SamToFastq I=valvs_unmapped.bam FASTQ=${OPT_1} SECOND_END_FASTQ=${OPT_2} VALIDATION_STRINGENCY=SILENT
-rm -f valvs_unmapped.bam
+samtools view -F4 -bh ${OPT_B} > valvs_mapped.bam
+java -jar $config_picard SamToFastq I=valvs_mapped.bam FASTQ=${OPT_1} SECOND_END_FASTQ=${OPT_2} VALIDATION_STRINGENCY=SILENT
+rm -f valvs_mapped.bam
 valvs_readstats.sh

@@ -44,7 +44,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) $config_version_number valvs_gem.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
+echo "$(date) $config_version valvs_gem.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
 
 check=$(dirname $OPT_R)
 file=$(basename $OPT_R)
@@ -53,7 +53,7 @@ tocheck=$check/$file
 
 if [ -e $tocheck".stidx" ]
 then
-	echo "stidx file exists"
+	:
 else
 	echo "indexing"
 	python2 /home1/boyd01z/SoftwareInstall/stampy-1.0.32/stampy.py -G ${OPT_R%.fa*} $OPT_R
@@ -62,8 +62,9 @@ fi
 
 if [ -e $tocheck".sthash" ] 
 then
-	echo "sthash file exists"
+	:
 else
+	echo "hashing"
         python2 /home1/boyd01z/SoftwareInstall/stampy-1.0.32/stampy.py -g ${OPT_R%.fa*} -H ${OPT_R%.fa*}
 
 fi

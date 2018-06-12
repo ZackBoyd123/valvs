@@ -16,9 +16,11 @@ while getopts :1:2: TEST; do
 	esac
 done
 
+. valvs_config.txt
+
 if [ -z $OPT_1 ]
 then
-	for fastq in *R1*.f*q
+	for fastq in *_*1_*.f*q
 	do
 		if [[ $fastq == *_R1_valvs.fq ]]
 		then
@@ -39,7 +41,7 @@ fi
 
 if [ -z $OPT_2 ]
 then
-	for fastq in *R2*.f*q
+	for fastq in *_*2*.f*q
 	do
         	if [[ $fastq == *_R2_valvs.fq ]]
         	then
@@ -58,7 +60,7 @@ else
 	$R2=${OPT_2}
 fi
 
-echo "$(date) valvs_set_reads.sh R1=$R1 R2=$R2" >> $LOG
+echo "$(date) $config_version valvs_set_reads.sh R1=$R1 R2=$R2" >> $LOG
 
 if [[ -n $R1 && -n $R2 ]]
 then

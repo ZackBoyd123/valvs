@@ -1,14 +1,14 @@
 #!/bin/bash
-config_num_threads=10
+config_threads=10
 
-config_kraken_db=/home2/kraken/MiniDB/
-config_contam_db=/home2/db/valvs/contam/contam.fasta
-config_diamond_db=/home2/db/diamond/refseq_protein
+config_kraken=/home2/kraken/MiniDB/
+config_contam=/home2/db/valvs/contam/contam.fasta
+config_diamond=/home2/db/diamond/refseq_protein
 
-config_trim_quality=20
-config_trim_length=20
+config_qual=20
+config_len=20
 
-config_version_number=valvs1.0
+config_version=valvs1.0
 
 config_picard_install=/home1/orto01r/programs/picard.jar
 config_varscan=/software/bin/VarScan.v2.3.7.jar

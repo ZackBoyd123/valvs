@@ -29,7 +29,7 @@ then
 fi
 
 echo "BAM file = ${OPT_B}"
-echo "$(date) $config_version_number valvs_bamstats.sh b=$OPT_B" >> $LOG
+echo "$(date) $config_version valvs_bamstats.sh b=$OPT_B" >> $LOG
 
 #sam flags 4 (unmapped) + 256 (secondary alignments) = 260
 MP=$(samtools view -F 260 -c $OPT_B)

@@ -7,6 +7,7 @@ touch $LOG
 
 while getopts :b:o TEST; do
 	case $TEST in
+	
 	b) OPT_B=$OPTARG
 	;;
 	o) OPT_O=$OPTARG
@@ -33,6 +34,6 @@ then
 fi
 
 echo "BAM = ${OPT_B} OutputStub = $OPT_O"
-echo "$(date) $config_version_number valvs_weesam.sh b=$OPT_B o=$OPT_O" >> $LOG
+echo "$(date) $config_version valvs_weesam.sh b=$OPT_B o=$OPT_O" >> $LOG
 
 weeSAMv1.4 -b $OPT_B -o ${OPT_O}.txt -plot ${OPT_O}.pdf

@@ -22,7 +22,7 @@ done
 
 if [ $1 = "-h" ]
 then
-        printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-e]\t\n"
+        printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-e]\tOnly assembly? y\n"
         exit 1
 
 fi
@@ -45,10 +45,10 @@ else
 fi
 if [ -z $OPT_T ]
 then
-        OPT_T=$config_num_threads
+        OPT_T=$config_threads
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} e = ${OPT_E}"
-echo "$(date) $config_version_number valvs_spades.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T e=$OPT_E" >> $LOG
+echo "$(date) $config_version valvs_spades.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T e=$OPT_E" >> $LOG
 
 spades.py $OPT_E -t $OPT_T -1 $OPT_1 -2 $OPT_2 -o ./spades

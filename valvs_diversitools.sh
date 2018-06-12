@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :r:b:d:o: TEST; do
+while getopts :r:b:o: TEST; do
 	case $TEST in
 	
 	r) OPT_R=$OPTARG
@@ -20,13 +20,11 @@ done
 
 if [ $1 = "-h" ]
 then
-        printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-r]\tReference File\n\t[-o]\tOutput File Name\n\t[-d]\tPut output files in a new directory? y/n\n"
+        printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-r]\tReference File\n\t[-o]\tOutput File Name\n"
         exit 1
 
 fi
 
-
-pwd=`pwd`
 . valvs_checkref.sh
 . valvs_config.txt
 
@@ -40,8 +38,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} BAM = ${OPT_B} Stub = ${OPT_O}"
-echo "$(date) $config_version_number valvs_diversitools.sh r=$OPT_R b=OPT_B" o=${OPT_O} >> $LOG
+echo "$(date) $config_version valvs_diversitools.sh r=$OPT_R b=OPT_B" o=${OPT_O} >> $LOG
 
-#RJO - valvs_path
 $config_diversiutils -bam $OPT_B -ref $OPT_R -stub $OPT_O
 
