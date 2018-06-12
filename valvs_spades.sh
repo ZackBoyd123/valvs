@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :1:2:e: TEST; do
+while getopts :1:2:t:e: TEST; do
 	case $TEST in
 
 	1) OPT_1=$OPTARG
@@ -14,6 +14,8 @@ while getopts :1:2:e: TEST; do
 	2) OPT_2=$OPTARG
 	;;
 	e) OPT_E=$OPTARG
+	;;
+	t) OPT_T=$OPTARG
 	;;
 	esac
 done
@@ -25,8 +27,8 @@ then
 
 fi
 
-
 . valvs_config.txt
+
 if [ -z $OPT_1 ]
 then
 	OPT_1=${FLD}_R1_valvs.fq
@@ -41,8 +43,12 @@ then
 else
 	OPT_E=''
 fi
+if [ -z $OPT_T ]
+then
+        OPT_T=$config_num_threads
+fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} e = ${OPT_E}"
-echo "$(date) $config_version_number valvs_spades.sh 1=$OPT_1 2=$OPT_2 e=$OPT_E" >> $LOG
+echo "$(date) $config_version_number valvs_spades.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T e=$OPT_E" >> $LOG
 
-spades.py $OPT_E -t 10 -1 $OPT_1 -2 $OPT_2 -o ./SpadesOutput
+spades.py $OPT_E -t $OPT_T -1 $OPT_1 -2 $OPT_2 -o ./spades

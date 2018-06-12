@@ -13,8 +13,6 @@ while getopts :r:b:d:o: TEST; do
 	;;
 	b) OPT_B=$OPTARG
 	;;
-	d) OPT_D=$OPTARG
-	;;
 	o) OPT_O=$OPTARG
 	;;
 	esac
@@ -45,13 +43,5 @@ echo "Ref = ${OPT_R} BAM = ${OPT_B} Stub = ${OPT_O}"
 echo "$(date) $config_version_number valvs_diversitools.sh r=$OPT_R b=OPT_B" o=${OPT_O} >> $LOG
 
 #RJO - valvs_path
-~orto01r/dist/diversiutils_linux -bam $OPT_B -ref $OPT_R -stub $OPT_O
-
-
-#if [ -n $OPT_D ]
-#then
-#    mkdir -p DiversitoolsOutput
-#    #mv diversiOut DiversitoolsOutput
-#fi
-
+$config_diversiutils -bam $OPT_B -ref $OPT_R -stub $OPT_O
 

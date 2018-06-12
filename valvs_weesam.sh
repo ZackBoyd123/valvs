@@ -29,9 +29,10 @@ fi
 
 if [ -z $OPT_O ] 
 then
-	OPT_O=$FLD"_weesam.txt"
+	OPT_O=$FLD"_weesam"
 fi
 
-echo "$(date) $config_version_number valvs_weesam.sh B=$OPT_B O=$OPT_O" >> $LOG
-echo $config_weesam_install
-$config_weesam_install -b $OPT_B -o $OPT_O
+echo "BAM = ${OPT_B} OutputStub = $OPT_O"
+echo "$(date) $config_version_number valvs_weesam.sh b=$OPT_B o=$OPT_O" >> $LOG
+
+weeSAMv1.4 -b $OPT_B -o ${OPT_O}.txt -plot ${OPT_O}.pdf

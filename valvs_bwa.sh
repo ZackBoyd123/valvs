@@ -29,9 +29,6 @@ then
 
 fi
 
-
-
-pwd=`pwd`
 . valvs_checkref.sh
 . valvs_config.txt
 
@@ -53,7 +50,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) $config_version_number valvs_bwa.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
+echo "$(date) $config_version_number valvs_bwa.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
 
 check=$(dirname $OPT_R)
 file=`awk -F "/" '{print $NF}' <<< $OPT_R`

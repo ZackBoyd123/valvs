@@ -47,10 +47,10 @@ then
     OPT_O=${FLD}
 fi
 
-echo "R1 = ${OPT_1} R2 = ${OPT_2} Output = ${OPT_O}"
-echo "$(date) $config_version_number valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O" >> $LOG
+echo "R1 = ${OPT_1} R2 = ${OPT_2} Output = ${OPT_O} db = $config_kraken_db"
+echo "$(date) $config_version_number valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O db=$config_kraken_db" >> $LOG
 
 #RJO - valvs_path
-kraken --db $config_kraken_db"Alpha_Kraken_GB_DB" --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
-kraken-report -db $config_kraken_db"MiniDB" ${OPT_O}_kraken.txt > ${OPT_O}_kraken_report.txt
+kraken --db $config_kraken_db --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
+kraken-report -db $config_kraken_db ${OPT_O}_kraken.txt > ${OPT_O}_kraken_report.txt
 ktImportTaxonomy -q 2 -t 3 -s 4 ${OPT_O}_kraken.txt -o ${OPT_O}_kraken.html

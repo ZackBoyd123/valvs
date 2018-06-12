@@ -27,11 +27,9 @@ then
 
 fi
 
-
-
-pwd=`pwd`
 . valvs_checkref.sh
 . valvs_config.txt
+
 if [ -z $OPT_1 ]
 then
 	OPT_1=$FLD"_R1_valvs.fq"

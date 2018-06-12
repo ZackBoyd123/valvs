@@ -6,13 +6,11 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :b:d: TEST; do
+while getopts :b: TEST; do
 	case $TEST in
 
 	b) OPT_B=$OPTARG
 	;;
-    	d) OPT_D=$OPTARG
-    	;;
 	esac
 done
 
@@ -23,8 +21,8 @@ then
 
 fi
 
-
 . valvs_config.txt
+
 if [ -z $OPT_B ] 
 then
 	OPT_B=${FLD}".bam"
@@ -35,12 +33,5 @@ echo "$(date) $config_version_number valvs_vphaser.sh b=$OPT_B" >> $LOG
 
 variant_caller -i $OPT_B -o ./
 
-if [ -n $OPT_D ]
-then
-    mkdir -p VPhaserOutput
-    #RJO - need to move vphaser files into here - maybe keep the key variant file in the folder though?
-    for i in $(ls | grep ".region")
-    do
-        mv $i VPhaserOutput
-    done
-fi
+mkdir -p vphaer
+mv *.REGION.* vphaser

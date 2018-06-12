@@ -27,10 +27,6 @@ then
 
 fi
 
-
-
-
-pwd=`pwd`
 . valvs_checkref.sh
 . valvs_config.txt
 

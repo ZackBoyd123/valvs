@@ -59,7 +59,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = $OPT_O"
-echo "$(date) $config_version_number valvs_bowtie2.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
+echo "$(date) $config_version_number valvs_bowtie2.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
 
 #Check if bt2 indexes already exist.
 check=$(dirname $OPT_R)
