@@ -5,7 +5,7 @@ then
 	then 
 		OPT_R=$PWD"/valvs_ref.fa"
 	else
-		OPT_R=$(dirname $PWD)"/References/valvs_ref.fa"
+		OPT_R=$(dirname $PWD)"/Refs/valvs_ref.fa"
 	fi
 fi
 
