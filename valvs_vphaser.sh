@@ -33,7 +33,7 @@ echo "$(date) $config_version valvs_vphaser.sh b=$OPT_B" >> $LOG
 
 variant_caller -i $OPT_B -o ./
 
-mkdir -p vphaer
-mv *.region vphaser
-mv *.covplot.R vphaser
-mv *.eb vphaser
+mkdir -p Vphaer
+mv *.region Vphaser
+mv *.covplot.R Vphaser
+mv *.eb Vphaser
