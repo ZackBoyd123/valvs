@@ -46,12 +46,12 @@ echo "R1 = ${OPT_1} R2 = ${OPT_2} T = ${OPT_T}"
 echo "$(date) $config_number valvs_ribopicker.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T" >> $LOG
 
 #Interleave the two fastq files into 1 file - as ribo picker does not do paired end
-java -jar ~orto01r/dist/ortools.jar -i ${OPT_1} ${OPT_2} valvs_unmap
+java -jar $config_ortools -i ${OPT_1} ${OPT_2} valvs_unmap
 
 ribopicker.pl -t ${OPT_T} -id valvs_ribo -f valvs_unmap.fastq -dbs ssr123,slr123
 
 #De-interleave - removes unmatched pairs
-java -jar ~orto01r/dist/ortools.jar -d valvs_ribo_nonrrna.fq
+java -jar $config_ortools -d valvs_ribo_nonrrna.fq
 
 mv valvs_ribo_nonrrna_1.fastq $FLD"_R1_valvs.fq"
 mv valvs_ribo_nonrrna_2.fastq $FLD"_R2_valvs.fq"
