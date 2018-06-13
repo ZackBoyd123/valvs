@@ -72,7 +72,7 @@ else
         R1=${OPT_O}_R1_valvs.fq
         R2=${OPT_O}_R2_valvs.fq
 fi
-echo "Ref = $OPT_R R1 = $OPT_1 R2 = $OPT_2 StubOutput = $OPT_O"
+echo "Ref = $OPT_R R1 = $OPT_1 R2 = $OPT_2 OutputStub = $OPT_O"
 echo "$(date) $config_version valvs_host.sh r=$OPT_R o=$OPT_O 1=$OPT_1 2=$OPT_2" >> $LOG
 
 valvs_bowtie2.sh -r $OPT_R -o ${OPT_O}.sam -1 $OPT_1 -2 $OPT_2
