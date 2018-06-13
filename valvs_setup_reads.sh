@@ -20,7 +20,8 @@ done
 
 if [ -z $OPT_1 ]
 then
-	for fastq in *_*1_*.f*q
+	ls *_*R1_*.f*q *_R1.f*q *_1.f*q > filelist.txt 2>/dev/null 
+	for fastq in `cat filelist.txt`
 	do
 		if [[ $fastq == *_R1_valvs.fq ]]
 		then
@@ -35,13 +36,15 @@ then
 			fi
 		fi
 	done
+	rm -f filelist.txt
 else
 	$R1=${OPT_1}
 fi
 
 if [ -z $OPT_2 ]
 then
-	for fastq in *_*2*.f*q
+	ls *_*R2_*.f*q *_R2.f*q *_2.f*q > filelist.txt 2>/dev/null
+        for fastq in `cat filelist.txt`
 	do
         	if [[ $fastq == *_R2_valvs.fq ]]
         	then
@@ -67,7 +70,7 @@ then
 	valvs_readstats.sh -1 $R1 -2 $R2
 	cp $R1 ${FLD}_R1_valvs.fq
 	cp $R2 ${FLD}_R2_valvs.fq
-	echo "valvs reads have been create: ${FLD}_R1_valvs.fq ${FLD}_R2_valvs.fq"
+	echo "valvs reads have been created: ${FLD}_R1_valvs.fq ${FLD}_R2_valvs.fq"
 else
 	echo "Could not find a R1 & R2 file"
 	echo "R1 = $R1"
