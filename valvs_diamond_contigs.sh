@@ -26,5 +26,5 @@ echo "$(date) $config_version valvs_diamond_contigs.sh O=$OPT_O" >> $LOG
 mkdir -p Spades/diam_temp
 mkdir -p diam_temp
 diamond blastx -d $config_diamond -f 6 -o Spades/${OPT_O}_diam_nr.txt -p 10 -q Spades/contigs.fasta -t diam_temp
-ktImportBLAST SpadesOutput/${OPT_O}_diam_nr.txt -o Spades/${OPT_O}_diam_nr.html > Spades/${OPT_O}_kt.txt
+ktImportBLAST Spades/${OPT_O}_diam_nr.txt -o Spades/${OPT_O}_diam_nr.html > Spades/${OPT_O}_kt.txt
 
