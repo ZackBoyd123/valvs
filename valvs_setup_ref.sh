@@ -37,13 +37,13 @@ else
 	$ref=${OPT_R}
 fi
 
-echo "$(date) valvs_set_ref.sh ref=$ref" >> $LOG
+echo "$(date) $config_version valvs_set_ref.sh ref=$ref" >> $LOG
 
 if [[ -n $ref ]]
 then
-	cp $ref valvs_ref.fa
-	echo "valvs_ref has been created: valvs_ref.fa"
+	rm -f valvs_ref.fa
+	ln -s $ref valvs_ref.fa
+	echo "valvs_ref link has been created: valvs_ref.fa -> $ref"
 else
 	echo "Could not find a ref fasta file"
 fi
-
