@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts ::1:2:t: TEST; do
+while getopts ::1:2:t:k: TEST; do
         case $TEST in
         
 	1) OPT_1=$OPTARG
@@ -14,6 +14,8 @@ while getopts ::1:2:t: TEST; do
         2) OPT_2=$OPTARG
         ;;
         t) OPT_T=$OPTARG
+        ;;
+	k) OPT_T=$OPTARG
         ;;
         esac
 done
@@ -53,6 +55,13 @@ java -jar ~orto01r/dist/ortools.jar -d valvs_ribo_nonrrna.fq
 
 mv valvs_ribo_nonrrna_1.fastq $FLD"_R1_valvs.fq"
 mv valvs_ribo_nonrrna_2.fastq $FLD"_R2_valvs.fq"
+
+if [ -z $OPT_K ]
+then
+	mkdir -p Reads
+	cp $FLD"_R1_valvs.fq" Reads/ribo_R1.fastq
+	cp $FLD"_R2_valvs.fq" Reads/ribo_R2.fastq
+fi
 
 valvs_readstats.sh
 
