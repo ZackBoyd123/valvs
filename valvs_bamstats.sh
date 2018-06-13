@@ -35,7 +35,6 @@ echo "$(date) $config_version valvs_bamstats.sh b=$OPT_B" >> $LOG
 MP=$(samtools view -F 260 -c $OPT_B)
 UMP=$(samtools view -f 4 -c $OPT_B)
 
-samtools idxstats ${OPT_B} >> $LOG
 echo "$MP mapped reads"
 echo "$UMP unmapped reads"
 printf "$MP\tmapped reads\n" >> $LOG
