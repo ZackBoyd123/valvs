@@ -13,3 +13,4 @@ config_version=valvs1.0
 config_picard=/home1/orto01r/programs/picard.jar
 config_varscan=/software/bin/VarScan.v2.3.7.jar
 config_diversiutils=~orto01r/dist/diversiutils_linux
+config_ortools=~orto01r/dist/ortools.jar
