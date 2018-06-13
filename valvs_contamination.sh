@@ -24,7 +24,6 @@ if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-k]\tKeep contamination BAM? y\n\t[-o]\tOutput File Name\n"
         exit 1
-
 fi
 
 . valvs_config.txt
