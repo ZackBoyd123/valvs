@@ -3,7 +3,7 @@ config_threads=10
 
 config_kraken=/home2/kraken/MiniDB/
 config_contam=/home2/db/valvs/valvs_contam.fasta
-config_diamond=/home2/db/diamond/refseq_protein
+config_diamond=/home2/db/diamond/nr
 
 config_qual=20
 config_len=20

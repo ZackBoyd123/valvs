@@ -51,4 +51,4 @@ fi
 echo "R1 = ${OPT_1} R2 = ${OPT_2} e = ${OPT_E}"
 echo "$(date) $config_version valvs_spades.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T e=$OPT_E" >> $LOG
 
-spades.py $OPT_E -t $OPT_T -1 $OPT_1 -2 $OPT_2 -o ./spades
+spades.py $OPT_E -t $OPT_T -1 $OPT_1 -2 $OPT_2 -o ./Spades
