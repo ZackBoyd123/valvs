@@ -13,6 +13,7 @@ while getopts :v: TEST; do
         
         v) OPT_V=$OPTARG
         ;;
+	esac
 done
 
 if [ -z $OPT_V ]

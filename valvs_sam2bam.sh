@@ -18,7 +18,7 @@ while getopts :t:s:o: TEST; do
 	esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-s]\tInput SAM File\n\t[-t]\tNumber of Threads to Use\n\t[-o]\tOutput BAM File Name\n"
         exit 1

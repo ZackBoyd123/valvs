@@ -14,6 +14,8 @@ while getopts :r: TEST; do
 	esac
 done
 
+. valvs_config.txt
+
 if [ -z $OPT_R ]
 then
 	for fa in *.f*

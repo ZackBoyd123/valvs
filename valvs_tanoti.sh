@@ -22,7 +22,7 @@ while getopts :r:1:2:o:t: TEST; do
 	esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-r]\tReference file\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-o]\tOutput File Name\n"
         exit 1
@@ -50,9 +50,9 @@ then
 fi
 
 echo "R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) $config_version valvs_tanoti.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O" >> $LOG
+echo "$(date) $config_version valvs_tanoti.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
 
-tanoti -r $OPT_R -i "$OPT_1" "$OPT_2" -o ${OPT_O}.sam -p 1 -P ${OPT_T}
+tanoti -r ${OPT_R} -i ${OPT_1} ${OPT_2} -o ${OPT_O}.sam -p 1 -P ${OPT_T}
 
 valvs_sam2bam.sh -t ${OPT_T} -s ${OPT_O}.sam -o ${OPT_O}.bam
 valvs_bamstats.sh -b ${OPT_O}.bam

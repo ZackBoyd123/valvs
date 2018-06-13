@@ -15,7 +15,7 @@ while getopts :b:o TEST; do
 	esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
 	printf "\t----${0##*/}----\n\t[-b]\tInput BAM file\n\t[-o]\tOutput file name.\n"
 	exit 1

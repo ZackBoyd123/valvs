@@ -22,7 +22,7 @@ while getopts :r:1:2:t:o: TEST; do
 	esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-r]\tReference file\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-t]\tThreads\n\t[-o]\tOutput File Name\n"
         exit 1
@@ -60,7 +60,9 @@ if [ -e $tocheck ]
 then
 	:
 else
+	echo "Indexing reference"
 	bwa index -p $OPT_R $OPT_R
+	echo "Finished indexing"
 fi
 
 bwa mem -t $OPT_T $OPT_R "$OPT_1" "$OPT_2" > ${OPT_O}.sam

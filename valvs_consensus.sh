@@ -16,7 +16,7 @@ while getopts :b:r: TEST; do
 	esac	
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-r]\tReference File\n"
         exit 1

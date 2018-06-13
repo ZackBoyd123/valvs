@@ -18,7 +18,7 @@ while getopts ::1:2:t: TEST; do
         esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-t]\tNumber of Threads to Use\n"
         exit 1

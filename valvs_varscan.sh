@@ -18,7 +18,7 @@ while getopts :q:f:m: TEST; do
 	esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-m]\tInput Mpileup File\n\t[-q]\tMinimum Average Quality\n\t[-f]\tMinimum Variant Frequency\n"
         exit 1

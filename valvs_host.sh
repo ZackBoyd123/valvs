@@ -22,7 +22,7 @@ while getopts :1:2:r:k:o TEST; do
 	esac
 done
 
-if [ $1 = "-h" ]
+if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-r]\tReference File\n\t[-o]\tOutput File Name\n\t[-k]\t Keep Old Files? y\n"
         exit 1
@@ -45,13 +45,12 @@ then
 fi
 
 firstchar="${OPT_R:0:1}"
-if [ "$firstchar" == "/" ] || [ "$firstchar" == "~" ]
+if [ "$firstchar" == "." ] || [ "$firstchar" == "/" ] || [ "$firstchar" == "~" ]
 then
 	:
 else
-	echo "Please specify your reference as a full or relative path"
-	#RJO - should we exit?
-	exit 1
+	echo "Please specify your reference as a full or relative path - exiting..."
+	1
 fi
 
 . valvs_config.txt

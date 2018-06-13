@@ -24,7 +24,7 @@ while getopts :r:1:2:t:m:o: TEST; do
 	esac
 done
 
-if [[ $1 == "-h" ]]
+if [[ $1 = "-h" ]]
 then
 	printf "\t----${0##*/}----\n\t[-r]\tReference file\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-t]\tThreads\n\t[-m]\tAlignment Mode\n\t[-o]\tOutputStub\n"
 	exit 1
@@ -72,8 +72,9 @@ else
 	then
 		:
 	else
-		echo "Couldn't find bowtie indexes -  indexing...."
+		echo "Indexing reference"
 		bowtie2-build $OPT_R $OPT_R
+		echo "Finished indexing"
 	fi
 fi
 
