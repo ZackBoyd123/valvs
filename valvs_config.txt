@@ -2,7 +2,7 @@
 config_threads=10
 
 config_kraken=/home2/kraken/MiniDB/
-config_contam=/home2/db/valvs/contam/contam.fasta
+config_contam=/home2/db/valvs/valvs_contam.fasta
 config_diamond=/home2/db/diamond/refseq_protein
 
 config_qual=20
@@ -10,6 +10,6 @@ config_len=20
 
 config_version=valvs1.0
 
-config_picard_install=/home1/orto01r/programs/picard.jar
+config_picard=/home1/orto01r/programs/picard.jar
 config_varscan=/software/bin/VarScan.v2.3.7.jar
 config_diversiutils=~orto01r/dist/diversiutils_linux
