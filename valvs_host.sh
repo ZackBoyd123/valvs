@@ -29,7 +29,6 @@ then
 
 fi
 
-
 #RJO - host ref is different to viral so can't use checkref
 if [ -z $OPT_R ]
 then
@@ -40,7 +39,7 @@ then
         then
                 OPT_R=$PWD"/valvs_host.fa"
         else
-                OPT_R=$(dirname $PWD)"/References/valvs_host.fa"
+                OPT_R=$(dirname $PWD)"/Refs/valvs_host.fa"
         fi
 fi
 
@@ -72,6 +71,7 @@ else
         R1=${OPT_O}_R1_valvs.fq
         R2=${OPT_O}_R2_valvs.fq
 fi
+
 echo "Ref = $OPT_R R1 = $OPT_1 R2 = $OPT_2 OutputStub = $OPT_O"
 echo "$(date) $config_version valvs_host.sh r=$OPT_R o=$OPT_O 1=$OPT_1 2=$OPT_2" >> $LOG
 
