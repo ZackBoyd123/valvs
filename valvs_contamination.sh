@@ -55,4 +55,5 @@ valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2
 
 if [ -z $OPT_K ]
 	rm -f ${OPT_O}.bam
+	rm -f ${OPT_O}.bam.bai
 fi
