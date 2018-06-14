@@ -15,12 +15,12 @@ else
 	done
 fi
 
-mkdir -p SeqRun
-mv *.csv SeqRun 2>/dev/null 
-mv *.xml SeqRun 2>/dev/null
-mv *.txt SeqRun 2>/dev/null
-mv Reports SeqRun 2>/dev/null
-mv Stats SeqRun 2>/dev/null
+mkdir -p SeqDat
+mv *.csv SeqDat 2>/dev/null 
+mv *.xml SeqDat 2>/dev/null
+mv *.txt SeqDat 2>/dev/null
+mv Reports SeqDat 2>/dev/null
+mv Stats SeqDat 2>/dev/null
 
 mkdir -p Undetermined
 mv Undetermined*.gz Undetermined 2>/dev/null
