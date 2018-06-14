@@ -1,32 +1,26 @@
 #!/bin/bash
 
-
 #IFS=$'\n'
 greater=$(ls | grep .f*a* | grep -v .fastq)
 if $greater -ge 2
 then
-	echo "There's more than one fasta you're trying to copy"
-	echo "Remove one and add it back into References folder later"
+	echo "There is more than one fasta file in the folder - remove the extra seqs"
 	exit 1
 else
-	mkdir References
+	mkdir Refs
 	for i in $(ls | grep .f*a* | grep -v .fastq)
 	do
-		mv $i References
+		mv $i Refs
+		ln -s Refs/$i Refs/valvs_ref.fa
 	done
-
-	cd References 
-	ln -s * ./ref.fa
-	cd ../
 fi
 
-
-mkdir -p seqrun
-mv *.csv seqrun 2>/dev/null 
-mv *.xml seqrun 2>/dev/null
-mv *.txt seqrun 2>/dev/null
-mv Reports seqrun 2>/dev/null
-mv Stats seqrun 2>/dev/null
+mkdir -p SeqRun
+mv *.csv SeqRun 2>/dev/null 
+mv *.xml SeqRun 2>/dev/null
+mv *.txt SeqRun 2>/dev/null
+mv Reports SeqRun 2>/dev/null
+mv Stats SeqRun 2>/dev/null
 
 mkdir -p Undetermined
 mv Undetermined*.gz Undetermined 2>/dev/null
@@ -48,7 +42,7 @@ do
 
 	cd $sample
 	
-	gunzip *.gz
+	gunzip *.gz 2>/dev/null
 
 	valvs_setup_reads.sh
 
