@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :1:2:t:o: TEST; do
+while getopts :1:2:t:o:d: TEST; do
 	case $TEST in
 
 	1) OPT_1=$OPTARG
@@ -16,6 +16,8 @@ while getopts :1:2:t:o: TEST; do
 	t) OPT_T=$OPTARG
 	;;
 	o) OPT_O=$OPTARG
+	;;
+	d) OPT_D=$OPTARG
 	;;
 	esac
 done
@@ -45,10 +47,14 @@ if [ -z $OPT_O ]
 then
 	OPT_O=${FLD}
 fi
+if [ -z $OPT_D ]
+then
+	OPT_D=$config_kraken
+fi
 
-echo "R1 = ${OPT_1} R2 = ${OPT_2} Output = ${OPT_O} db = $config_kraken_db"
-echo "$(date) $config_version valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O db=$config_kraken" >> $LOG
+echo "R1 = ${OPT_1} R2 = ${OPT_2} Output = ${OPT_O} db = $OPT_D"
+echo "$(date) $config_version valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O db=$OPT_D" >> $LOG
 
-kraken --db $config_kraken --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
-kraken-report -db $config_kraken ${OPT_O}_kraken.txt > ${OPT_O}_kraken_report.txt
+kraken --db $OPT_D --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
+kraken-report -db $OPT_D ${OPT_O}_kraken.txt > ${OPT_O}_kraken_report.txt
 ktImportTaxonomy -q 2 -t 3 -s 4 ${OPT_O}_kraken.txt -o ${OPT_O}_kraken.html
