@@ -1,7 +1,7 @@
 #!/bin/bash
 config_threads=10
 
-config_kraken=/home2/kraken/MiniDB/
+config_kraken=/home2/db/kraken/MiniDB/
 config_contam=/home2/db/valvs/valvs_contam.fasta
 config_diamond=/home2/db/diamond/nr
 
