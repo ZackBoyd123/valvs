@@ -25,20 +25,20 @@ mv Stats SeqDat 2>/dev/null
 mkdir -p Undetermined
 mv Undetermined*.* Undetermined 2>/dev/null
 
-for fastq in *_R1_*
+ls *_R1_*.f*q *_R1.f*q *_1.f*q > filelist.txt 2>/dev/null 
+for fastq in `cat filelist.txt`
 do
 	echo $fastq
-        
-	#sample="${fastq%_R1_001.fastq.gz}"
-	#sample="${sample%_L001}"	
 
-        sample="${fastq%_R1_*}"
+	sample="${fastq%_1.f*q}"
+	sample="${fastq%_R1.f*q}"
+        sample="${fastq%_R1_*.f*q}"
         sample="${sample%_L001}"
 
 	echo $sample
 	
 	mkdir -p ${sample}
-	mv ${sample}*.* ${sample}
+	mv ${sample}*.f*q ${sample}
 
 	cd $sample
 	
@@ -49,3 +49,4 @@ do
 	cd ..
 done
 
+rm -f filelist.txt
