@@ -58,6 +58,8 @@ mv valvs_ribo_nonrrna_2.fastq $FLD"_R2_valvs.fq"
 
 if [ -z $OPT_K ]
 then
+	:
+else
 	mkdir -p Reads
 	cp $FLD"_R1_valvs.fq" Reads/ribo_R1.fastq
 	cp $FLD"_R2_valvs.fq" Reads/ribo_R2.fastq
