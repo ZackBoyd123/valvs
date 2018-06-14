@@ -23,7 +23,7 @@ mv Reports SeqDat 2>/dev/null
 mv Stats SeqDat 2>/dev/null
 
 mkdir -p Undetermined
-mv Undetermined*.gz Undetermined 2>/dev/null
+mv Undetermined*.* Undetermined 2>/dev/null
 
 for fastq in *_R1_*
 do
