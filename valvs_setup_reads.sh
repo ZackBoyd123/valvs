@@ -59,6 +59,7 @@ then
                 	fi
         	fi
 	done
+	rm -f filelist.txt
 else
 	$R2=${OPT_2}
 fi
