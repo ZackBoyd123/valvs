@@ -80,8 +80,10 @@ valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2
 
 if [ -z $OPT_K ]
 then
-    rm -f ${OPT_O}.bam
-    mkdir -p Reads
-    cp $R1 Reads/host_R1.fastq
-    cp $R2 Reads/host_R2.fastq
+	rm -f ${OPT_O}.bam
+	rm -f ${OPT_O}.bam.bai
+else
+	mkdir -p Reads
+	cp $R1 Reads/host_R1.fastq
+	cp $R2 Reads/host_R2.fastq
 fi
