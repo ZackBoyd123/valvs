@@ -20,7 +20,7 @@ done
 
 if [ -z $OPT_1 ]
 then
-	ls *_*R1_*.f*q *_R1.f*q *_1.f*q > filelist.txt 2>/dev/null 
+	ls *_R1_*.f*q *_R1.f*q *_1.f*q > filelist.txt 2>/dev/null 
 	for fastq in `cat filelist.txt`
 	do
 		if [[ $fastq == *_R1_valvs.fq ]]
@@ -43,7 +43,7 @@ fi
 
 if [ -z $OPT_2 ]
 then
-	ls *_*R2_*.f*q *_R2.f*q *_2.f*q > filelist.txt 2>/dev/null
+	ls *_R2_*.f*q *_R2.f*q *_2.f*q > filelist.txt 2>/dev/null
         for fastq in `cat filelist.txt`
 	do
         	if [[ $fastq == *_R2_valvs.fq ]]
