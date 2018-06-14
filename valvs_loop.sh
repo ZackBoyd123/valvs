@@ -21,7 +21,7 @@ then
         OPT_V=valvs_default.sh
 fi
 
-for i in $(ls -d */ | grep -v Undetermined | grep -v SeqRun)
+for i in $(ls -d */ | grep -v Undetermined | grep -v SeqDat)
 do 
 	echo $i
 
