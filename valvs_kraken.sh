@@ -30,15 +30,8 @@ then
 fi
 
 . valvs_config.txt
+. valvs_check_reads.sh
 
-if [ -z $OPT_1 ] 
-then
-	OPT_1=${FLD}_R1_valvs.fq
-fi
-if [ -z $OPT_2 ]
-then
-	OPT_2=${FLD}_R2_valvs.fq
-fi
 if [ -z $OPT_T ] 
 then
 	OPT_T=$config_threads
@@ -52,9 +45,18 @@ then
 	OPT_D=$config_kraken
 fi
 
-echo "R1 = ${OPT_1} R2 = ${OPT_2} Output = ${OPT_O} db = $OPT_D"
-echo "$(date) $config_version valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O db=$OPT_D" >> $LOG
+if [ -z $OPT_U ]
+then
+	echo "R1 = ${OPT_1} R2 = ${OPT_2} Output = ${OPT_O} db = $OPT_D"
+	echo "$(date) $config_version valvs_kraken.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T o=$OPT_O db=$OPT_D" >> $LOG
 
-kraken --db $OPT_D --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
+	kraken --db $OPT_D --paired $OPT_1 $OPT_2 --threads $OPT_T > ${OPT_O}_kraken.txt
+else
+	echo "RU = ${OPT_U} Output = ${OPT_O} db = $OPT_D"
+	echo "$(date) $config_version valvs_kraken.sh U=$OPT_U t=$OPT_T o=$OPT_O db=$OPT_D" >> $LOG
+
+	kraken --db $OPT_D --threads $OPT_T $OPT_U > ${OPT_O}_kraken.txt
+fi
+
 kraken-report -db $OPT_D ${OPT_O}_kraken.txt > ${OPT_O}_kraken_report.txt
 ktImportTaxonomy -q 2 -t 3 -s 4 ${OPT_O}_kraken.txt -o ${OPT_O}_kraken.html
