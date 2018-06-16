@@ -33,15 +33,8 @@ fi
 
 . valvs_checkref.sh
 . valvs_config.txt
+. valvs_check_reads.sh
 
-if [ -z $OPT_1 ]
-then
-	OPT_1=$FLD"_R1_valvs.fq"
-fi
-if [ -z $OPT_2 ] 
-then
-	OPT_2=$FLD"_R2_valvs.fq"
-fi
 if [ -z $OPT_T ] 
 then
 	OPT_T=$config_threads
@@ -54,9 +47,6 @@ if [ -z $OPT_O ]
 then
 	OPT_O=${FLD}
 fi
-
-echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = $OPT_O"
-echo "$(date) $config_version valvs_bowtie2.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
 
 #Check if bt2 indexes already exist.
 check=$(dirname $OPT_R)
@@ -78,6 +68,18 @@ else
 	fi
 fi
 
-bowtie2 --"$OPT_M" -p $OPT_T -x $OPT_R -1 $OPT_1 -2 $OPT_2 -S ${OPT_O}.sam
+if [ -z $OPT_U ]
+then
+	echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = $OPT_O"
+	echo "$(date) $config_version valvs_bowtie2.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
+	
+	bowtie2 --"$OPT_M" -p $OPT_T -x $OPT_R -1 $OPT_1 -2 $OPT_2 -S ${OPT_O}.sam
+else
+	echo "Ref = ${OPT_R} RU = ${OPT_U} OutputStub = $OPT_O"
+	echo "$(date) $config_version valvs_bowtie2.sh r=$OPT_R u=$OPT_U o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
+
+	bowtie2 --"$OPT_M" -p $OPT_T -x $OPT_R -U $OPT_U -S ${OPT_O}.sam
+fi
+
 valvs_sam2bam.sh -t $OPT_T -s ${OPT_O}.sam -o ${OPT_O}.bam
 valvs_bamstats.sh -b ${OPT_O}.bam
