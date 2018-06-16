@@ -71,7 +71,7 @@ then
 	valvs_readstats.sh -1 $R1 -2 $R2
 	cp $R1 ${FLD}_R1_valvs.fq
 	cp $R2 ${FLD}_R2_valvs.fq
-	echo "valvs paired end reads have been created: ${FLD}_R1_valvs.fq ${FLD}_R2_valvs.fq"
+	echo "valvs paired end reads have been created: $R1 -> ${FLD}_R1_valvs.fq $R2 -> ${FLD}_R2_valvs.fq"
 	echo "$(date) $config_version valvs_set_reads.sh R1=$R1 R2=$R2" >> $LOG
 else
 	if [ -z $OPT_U ]
@@ -94,6 +94,6 @@ else
 
 	valvs_readstats.sh -u $RU
         cp $RU ${FLD}_valvs.fq
-        echo "valvs single end reads have been created: ${FLD}_valvs.fq"
+        echo "valvs single end reads have been created: $RU -> ${FLD}_valvs.fq"
 	echo "$(date) $config_version valvs_set_reads.sh RU=$RU" >> $LOG
 fi
