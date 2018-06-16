@@ -2,7 +2,7 @@
 
 #$1=valvs script to run in each folder
 
-echo "valvs_loop"
+echo "valvs_batch"
 
 FLD=${PWD##*/}
 LOG="${FLD}_valvs_loop.txt"
@@ -22,7 +22,7 @@ then
 fi
 
 echo "V = ${OPT_V}"
-echo "$(date) $config_version valvs_loop.sh v=$OPT_V" >> $LOG
+echo "$(date) $config_version valvs_batch.sh v=$OPT_V" >> $LOG
 
 for i in $(ls -d */ | grep -v Undetermined | grep -v SeqDat)
 do 
