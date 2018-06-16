@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :1:2:t:e: TEST; do
+while getopts :1:2:t:e:u: TEST; do
 	case $TEST in
 
 	1) OPT_1=$OPTARG
@@ -17,6 +17,8 @@ while getopts :1:2:t:e: TEST; do
 	;;
 	t) OPT_T=$OPTARG
 	;;
+	u) OPT_U=$OPTARG
+        ;;
 	esac
 done
 
@@ -28,15 +30,8 @@ then
 fi
 
 . valvs_config.txt
+. valvs_check_reads.sh
 
-if [ -z $OPT_1 ]
-then
-	OPT_1=${FLD}_R1_valvs.fq
-fi
-if [ -z $OPT_2 ]
-then
-	OPT_2=${FLD}_R2_valvs.fq
-fi
 if [ -z $OPT_E ]
 then
 	OPT_E='--only-assembler'
@@ -48,7 +43,16 @@ then
         OPT_T=$config_threads
 fi
 
-echo "R1 = ${OPT_1} R2 = ${OPT_2} e = ${OPT_E}"
-echo "$(date) $config_version valvs_spades.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T e=$OPT_E" >> $LOG
+if [ -z $OPT_U ]
+then
+	echo "R1 = ${OPT_1} R2 = ${OPT_2} e = ${OPT_E}"
+	echo "$(date) $config_version valvs_spades.sh 1=$OPT_1 2=$OPT_2 t=$OPT_T e=$OPT_E" >> $LOG
 
-spades.py $OPT_E -t $OPT_T -1 $OPT_1 -2 $OPT_2 -o ./Spades
+	spades.py $OPT_E -t $OPT_T -1 $OPT_1 -2 $OPT_2 -o ./Spades
+else
+        echo "RU = ${OPT_U} e = ${OPT_E}"
+        echo "$(date) $config_version valvs_spades.sh u=$OPT_U t=$OPT_T e=$OPT_E" >> $LOG
+
+        spades.py $OPT_E -t $OPT_T -s $OPT_U  -o ./Spades
+fi
+
