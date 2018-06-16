@@ -61,6 +61,8 @@ trim_galore -q $OPT_Q --dont_gzip --length $OPT_L --paired "$OPT_1" "$OPT_2"
 
 if [ -z $OPT_K ]
 then
+	:
+else
 	mkdir -p Reads
 	cp ${OPT_1%.f*}_val_1.fq Reads/trim_R1.fastq
 	cp ${OPT_2%.f*}_val_2.fq Reads/trim_R2.fastq

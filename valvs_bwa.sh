@@ -31,7 +31,7 @@ then
 
 fi
 
-. valvs_checkref.sh
+. valvs_check_ref.sh
 . valvs_config.txt
 . valvs_check_reads.sh
 

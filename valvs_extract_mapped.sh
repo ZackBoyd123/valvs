@@ -47,9 +47,10 @@ echo "$(date) $config_version valvs_extract_mapped.sh b=$OPT_B" 1=${OPT_1} 2=${O
 #java -jar $config_picard SamToFastq I=valvs_mapped.bam FASTQ=${OPT_1} SECOND_END_FASTQ=${OPT_2} VALIDATION_STRINGENCY=SILENT
 #rm -f valvs_mapped.bam
 
-OPT_F=${OPT_B%.bam}"_valvs"
-bam2fastq --no-unaligned --aligned -o ${OPT_F}"#.fq" ${OPT_B}
-mv ${OPT_F}_1.fastq ${OPT_B%.bam}"_R2_valvs.fq"
-mv ${OPT_F}_2.fastq ${OPT_B%.bam}"_R2_valvs.fq"
+OPT_F=${OPT_B%.bam}
+echo "$OPT_F"
+bam2fastq --force --no-unaligned --aligned -o ${OPT_F}"#.fq" ${OPT_B}
+mv ${OPT_F}_1.fq ${OPT_B%.bam}"_R1_valvs.fq"
+mv ${OPT_F}_2.fq ${OPT_B%.bam}"_R2_valvs.fq"
 
-valvs_readstats.sh
+valvs_readstats.sh -1 ${OPT_B%.bam}"_R1_valvs.fq" -2 ${OPT_B%.bam}"_R2_valvs.fq"

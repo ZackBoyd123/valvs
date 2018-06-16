@@ -27,7 +27,7 @@ then
 
 fi
 
-. valvs_checkref.sh
+. valvs_check_ref.sh
 . valvs_config.txt
 
 if [ -z $OPT_1 ]

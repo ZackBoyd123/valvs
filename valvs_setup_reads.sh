@@ -6,12 +6,14 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :1:2: TEST; do
+while getopts :1:2:u: TEST; do
 	case $TEST in
 	
 	1) OPT_1=$OPTARG
 	;;
 	2) OPT_2=$OPTARG
+	;;
+	u) OPT_U=$OPTARG
 	;;
 	esac
 done
@@ -64,16 +66,34 @@ else
 	$R2=${OPT_2}
 fi
 
-echo "$(date) $config_version valvs_set_reads.sh R1=$R1 R2=$R2" >> $LOG
-
 if [[ -n $R1 && -n $R2 ]]
 then
 	valvs_readstats.sh -1 $R1 -2 $R2
 	cp $R1 ${FLD}_R1_valvs.fq
 	cp $R2 ${FLD}_R2_valvs.fq
-	echo "valvs reads have been created: ${FLD}_R1_valvs.fq ${FLD}_R2_valvs.fq"
+	echo "valvs paired end reads have been created: ${FLD}_R1_valvs.fq ${FLD}_R2_valvs.fq"
+	echo "$(date) $config_version valvs_set_reads.sh R1=$R1 R2=$R2" >> $LOG
 else
-	echo "Could not find a R1 & R2 file"
-	echo "R1 = $R1"
-	echo "R2 = $R2"
+	if [ -z $OPT_U ]
+	then
+		ls *.f*q > filelist.txt 2>/dev/null
+        	for fastq in `cat filelist.txt`
+       		do
+			if [ -z $RU ]
+                	then
+				echo "RU = $fastq"
+                        	RU=$fastq
+			else
+				echo "Multiple RU fastq files exist $fastq, using the 1st one $RU" 
+			fi
+        	done
+        	rm -f filelist.txt
+	else
+		$RU=${OPT_U}
+	fi
+
+	valvs_readstats.sh -u $RU
+        cp $RU ${FLD}_valvs.fq
+        echo "valvs single end reads have been created: ${FLD}_valvs.fq"
+	echo "$(date) $config_version valvs_set_reads.sh RU=$RU" >> $LOG
 fi

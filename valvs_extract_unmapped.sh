@@ -48,8 +48,8 @@ echo "$(date) $config_version valvs_extract_unmapped.sh b=$OPT_B" 1=${OPT_1} 2=$
 #rm -f valvs_unmapped.bam
 
 OPT_F=${OPT_B%.bam}"_valvs"
-bam2fastq --no-aligned --unaligned -o ${OPT_F}"#.fq" ${OPT_B}
-mv ${OPT_F}_1.fastq ${OPT_B%.bam}"_R2_valvs.fq"
-mv ${OPT_F}_2.fastq ${OPT_B%.bam}"_R2_valvs.fq"
+bam2fastq --force --no-aligned --unaligned -o ${OPT_F}"#.fq" ${OPT_B}
+mv ${OPT_F}_1.fq ${OPT_B%.bam}"_R1_valvs.fq"
+mv ${OPT_F}_2.fq ${OPT_B%.bam}"_R2_valvs.fq"
 
 valvs_readstats.sh
