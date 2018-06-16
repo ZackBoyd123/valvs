@@ -43,7 +43,13 @@ fi
 echo "BAM = ${OPT_B} R1out = ${OPT_1} R2out = ${OPT_2}"
 echo "$(date) $config_version valvs_extract_mapped.sh b=$OPT_B" 1=${OPT_1} 2=${OPT_2} >> $LOG
 
-samtools view -F4 -bh ${OPT_B} > valvs_mapped.bam
-java -jar $config_picard SamToFastq I=valvs_mapped.bam FASTQ=${OPT_1} SECOND_END_FASTQ=${OPT_2} VALIDATION_STRINGENCY=SILENT
-rm -f valvs_mapped.bam
+#samtools view -F4 -bh ${OPT_B} > valvs_mapped.bam
+#java -jar $config_picard SamToFastq I=valvs_mapped.bam FASTQ=${OPT_1} SECOND_END_FASTQ=${OPT_2} VALIDATION_STRINGENCY=SILENT
+#rm -f valvs_mapped.bam
+
+OPT_F=${OPT_B%.bam}"_valvs"
+bam2fastq --no-unaligned --aligned -o ${OPT_F}"#.fq" ${OPT_B}
+mv ${OPT_F}_1.fastq ${OPT_B%.bam}"_R2_valvs.fq"
+mv ${OPT_F}_2.fastq ${OPT_B%.bam}"_R2_valvs.fq"
+
 valvs_readstats.sh
