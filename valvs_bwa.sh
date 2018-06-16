@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :r:1:2:t:o: TEST; do
+while getopts :r:1:2:t:o:u: TEST; do
 	case $TEST in 
 	
 	r) OPT_R=$OPTARG
@@ -19,6 +19,8 @@ while getopts :r:1:2:t:o: TEST; do
 	;;	
 	o) OPT_O=$OPTARG
 	;;	
+	u) OPT_U=$OPTARG
+	;;
 	esac
 done
 
@@ -31,15 +33,8 @@ fi
 
 . valvs_checkref.sh
 . valvs_config.txt
+. valvs_check_reads.sh
 
-if [ -z $OPT_1 ]
-then
-	OPT_1=$FLD"_R1_valvs.fq"
-fi
-if [ -z $OPT_2 ] 
-then
-	OPT_2=$FLD"_R2_valvs.fq"
-fi
 if [ -z $OPT_T ]
 then
 	OPT_T=$config_threads
@@ -48,9 +43,6 @@ if [ -z $OPT_O ]
 then
 	OPT_O=${FLD}
 fi
-
-echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) $config_version valvs_bwa.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
 
 check=$(dirname $OPT_R)
 file=`awk -F "/" '{print $NF}' <<< $OPT_R`
@@ -65,6 +57,18 @@ else
 	echo "Finished indexing"
 fi
 
-bwa mem -t $OPT_T $OPT_R "$OPT_1" "$OPT_2" > ${OPT_O}.sam
+if [ -z $OPT_U ]
+then
+	echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
+	echo "$(date) $config_version valvs_bwa.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
+
+	bwa mem -t $OPT_T $OPT_R $OPT_1 $OPT_2 > ${OPT_O}.sam
+else
+	echo "Ref = ${OPT_R} RU = ${OPT_U} OutputStub = ${OPT_O}"
+	echo "$(date) $config_version valvs_bwa.sh r=$OPT_R U=$OPT_U o=$OPT_O t=$OPT_T" >> $LOG
+
+	bwa mem -t $OPT_T $OPT_R $OPT_U > ${OPT_O}.sam
+fi
+
 valvs_sam2bam.sh -t $OPT_T -s ${OPT_O}.sam -o ${OPT_O}.bam
 valvs_bamstats.sh -b ${OPT_O}.bam
