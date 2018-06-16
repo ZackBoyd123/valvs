@@ -11,7 +11,7 @@ while getopts :1:2: TEST; do
 
 	1) OPT_1=$OPTARG
 	;;	
-  2) OPT_2=$OPTARG
+ 	2) OPT_2=$OPTARG
 	;;	
 	esac
 done
