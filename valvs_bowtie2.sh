@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :r:1:2:t:m:o: TEST; do
+while getopts :r:1:2:t:m:o:u: TEST; do
 	case $TEST in 
 
 	r) OPT_R=$OPTARG
@@ -20,6 +20,8 @@ while getopts :r:1:2:t:m:o: TEST; do
 	m) OPT_M=$OPTARG
 	;;
 	o) OPT_O=$OPTARG
+	;;
+	u) OPT_U=$OPTARG
 	;;
 	esac
 done
