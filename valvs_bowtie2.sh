@@ -83,5 +83,8 @@ else
 	bowtie2 --"$OPT_M" -p $OPT_T -x $OPT_R -U $OPT_U -S ${OPT_O}.sam
 fi
 
+#For fast mapped/unmapped do it here - lose number of mapped/unmapped afterwards
+#samtools view -h -f4 ${OPT_O}.sam > ${OPT_O}.sam
+
 valvs_sam2bam.sh -t $OPT_T -s ${OPT_O}.sam -o ${OPT_O}.bam
 valvs_bamstats.sh -b ${OPT_O}.bam
