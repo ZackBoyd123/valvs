@@ -1,5 +1,15 @@
+echo "valvs"
+
+FLD=${PWD##*/}
+LOG="${FLD}_valvs_log.txt"
+touch $LOG
+
+. valvs_config.txt
+
 valvs_setup_reads.sh
 valvs_setup_ref.sh
 valvs_trim_galore.sh
 valvs_tanoti.sh
 valvs_vphaser.sh
+
+echo "$(date) $config_version valvs.sh" >> $LOG
