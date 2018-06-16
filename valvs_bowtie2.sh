@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :r:1:2:t:m:o:u: TEST; do
+while getopts :r:1:2:t:m:o:u:f: TEST; do
 	case $TEST in 
 
 	r) OPT_R=$OPTARG
@@ -22,6 +22,8 @@ while getopts :r:1:2:t:m:o:u: TEST; do
 	o) OPT_O=$OPTARG
 	;;
 	u) OPT_U=$OPTARG
+	;;
+	f) OPT_U=$OPTARG
 	;;
 	esac
 done
@@ -83,8 +85,13 @@ else
 	bowtie2 --"$OPT_M" -p $OPT_T -x $OPT_R -U $OPT_U -S ${OPT_O}.sam
 fi
 
-#For fast mapped/unmapped do it here - lose number of mapped/unmapped afterwards
-#samtools view -h -f4 ${OPT_O}.sam > ${OPT_O}.sam
+#Fast option - remove mapped here
+if [ -z $OPT_F ]
+then
+	valvs_sam2bam.sh -t $OPT_T -s ${OPT_O}.sam -o ${OPT_O}.bam
+else
+	#technically expected BAM but should work
+	valvs_remove_mapped.sh -b ${OPT_O}.sam
+fi
 
-valvs_sam2bam.sh -t $OPT_T -s ${OPT_O}.sam -o ${OPT_O}.bam
 valvs_bamstats.sh -b ${OPT_O}.bam
