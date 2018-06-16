@@ -18,7 +18,7 @@ done
 
 if [ -z $OPT_V ]
 then
-        OPT_V=valvs_default.sh
+        OPT_V=valvs.sh
 fi
 
 for i in $(ls -d */ | grep -v Undetermined | grep -v SeqDat)
