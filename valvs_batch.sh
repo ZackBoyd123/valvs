@@ -18,16 +18,16 @@ done
 
 if [ -z $OPT_V ]
 then
-        OPT_V=valvs.sh
+        OPT_V=valvs_batch_align.sh
 fi
+
+echo "V = ${OPT_V}"
+echo "$(date) $config_version valvs_loop.sh v=$OPT_V" >> $LOG
 
 for i in $(ls -d */ | grep -v Undetermined | grep -v SeqDat)
 do 
 	echo $i
-
 	cd $i
-	
 	$OPT_V
-
 	cd ../
 done
