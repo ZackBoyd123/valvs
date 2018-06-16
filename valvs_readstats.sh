@@ -24,23 +24,26 @@ then
 fi
 
 . valvs_config.txt
+. valvs_check_reads.sh
 
-if [ -z $OPT_1 ]
+if [ -z $OPT_U ]
 then
-    OPT_1=$FLD"_R1_valvs.fq"
+	echo "R1 = ${OPT_1} R2 = ${OPT_2}"
+	echo "$(date) $config_version valvs_readstats.sh 1=$OPT_1 2=$OPT_2" >> $LOG
+
+	R1=$(expr `(wc -l ${OPT_1} | cut -f1 -d " ")` / 4)
+	R2=$(expr `(wc -l ${OPT_2} | cut -f1 -d " ")` / 4)
+
+	echo "$R1 reads in R1 ${OPT_1}"
+	echo "$R2 reads in R2 ${OPT_2}"
+	printf "$R1\treads in R1 ${OPT_1}\n" >> $LOG
+	printf "$R2\treads in R2 ${OPT_2}\n" >> $LOG
+else
+	echo "RU = ${OPT_U}"
+	echo "$(date) $config_version valvs_readstats.sh u=$OPT_U" >> $LOG
+
+	RU=$(expr `(wc -l ${OPT_U} | cut -f1 -d " ")` / 4)
+
+	echo "$RU reads in R1 ${OPT_U}"
+	printf "$RU\treads in RU ${OPT_U}\n" >> $LOG
 fi
-if [ -z $OPT_2 ]
-then
-    OPT_2=$FLD"_R2_valvs.fq"
-fi
-
-echo "R1 = ${OPT_1} R2 = ${OPT_2}"
-echo "$(date) $config_version valvs_readstats.sh 1=$OPT_1 2=$OPT_2" >> $LOG
-
-R1=$(expr `(wc -l ${OPT_1} | cut -f1 -d " ")` / 4)
-R2=$(expr `(wc -l ${OPT_2} | cut -f1 -d " ")` / 4)
-
-echo "$R1 reads in R1 ${OPT_1}"
-echo "$R2 reads in R2 ${OPT_2}"
-printf "$R1\treads in R1 ${OPT_1}\n" >> $LOG
-printf "$R2\treads in R2 ${OPT_2}\n" >> $LOG
