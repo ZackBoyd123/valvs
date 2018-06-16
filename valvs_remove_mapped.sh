@@ -39,6 +39,6 @@ OPT_O=${OPT_B%.bam}.v2.bam
 echo "BAM = ${OPT_B}"
 echo "$(date) $config_version valvs_remove_mapped.sh b=$OPT_B" >> $LOG
 
-samtools view -@ $OPT_T -bh -f 4 $OPT_B > $OPT_O
+samtools view -@ $OPT_T -bh -f 4 $OPT_B | samtools sort -@ $OPT_T -o $OPT_O
 mv $OPT_O $OPT_B
- 
+samtools index ${OPT_B}
