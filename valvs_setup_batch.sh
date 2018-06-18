@@ -8,7 +8,7 @@ then
 	exit 1
 else
 	mkdir Refs
-	for i in $(ls | grep .f*a* | grep -v .fastq)
+	for i in $(ls | grep .f*a | grep -v .fq)
 	do
 		mv $i Refs
 		cd Refs
