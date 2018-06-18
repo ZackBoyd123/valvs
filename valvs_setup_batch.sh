@@ -11,7 +11,9 @@ else
 	for i in $(ls | grep .f*a* | grep -v .fastq)
 	do
 		mv $i Refs
-		ln -s Refs/$i Refs/valvs_ref.fa
+		cd Refs
+		ln -s $i valvs_ref.fa
+		cd ..
 	done
 fi
 
