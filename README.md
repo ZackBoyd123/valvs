@@ -12,14 +12,21 @@ Authors: Zack Boyd and Richard Orton
 #### valvs_bowtie2.sh
 Run as:	`valvs_bowtie2.sh`  
 Can be given: `{(-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq)} -r ref.fa -t threads -m mode -o output`  
-###### __Example Paired End__
+###### _Example Paired End_
 ``` bash
-user@server: valvs_bowtie2.sh -u unpaired.fasta -r ref.fasta -t 15 -m local -o myoutput.txt
+user@server: valvs_bowtie2.sh -1 paired1.fq -2 paired2.fq -r ref.fasta -t 15 -m local -o myoutput
 ```
 #### valvs_bwa.sh
 Run as:	`valvs_bwa.sh`  
-Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -t threads -o output` 
+Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -t threads -o output`  
+###### _Example Paired End_
+``` bash
+user@server: valvs_bwa.sh -u unpaired.fastq -r ref.fasta -t 6 -o bwa_out
+```
 #### valvs_tanoti.sh
 Run as:	`valvs_tanoti.sh`  
+###### _Example Paired End_
 Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -o output`  
-
+``` bash
+user@server: valvs_tanoti.sh -1 paired1.fq -2 paired2.fq -r ref.fa -o tanoti_out
+```
