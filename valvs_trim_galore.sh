@@ -28,7 +28,7 @@ done
 
 if [[ $1 = "-h" ]]
 then
-        printf "\t----${0##*/}----\n\t[-q]\tQuality Score\n\t[-l]\Length\n[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-l]\n"
+        printf "\t----${0##*/}----\n\t[-q]\tQuality Score\n\t[-l]\tLength\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-l]\n"
         exit 1
 
 fi
