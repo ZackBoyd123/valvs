@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "valvs_gem"
+echo "valvs_stampy"
 
 FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
@@ -44,7 +44,7 @@ then
 fi
 
 echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O}"
-echo "$(date) $config_version valvs_gem.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
+echo "$(date) $config_version valvs_stampy.sh R=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T" >> $LOG
 
 check=$(dirname $OPT_R)
 file=$(basename $OPT_R)
