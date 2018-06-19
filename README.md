@@ -8,7 +8,10 @@ This is combined with an evaluation of the different reference aligners (BWA, Bo
 valvs also incorporates a number of additional scripts to convert the output of variant callers (VPhaser, DiversiTools, VarScan) into a standard VCF format, as well as scripts for comparing the mutations present in two samples (such as duplicates/replicates) and identifying common motifs around mutations.
 
 Authors: Zack Boyd and Richard Orton
-
+## **Assemblers**
 ### valvs_bowtie2.sh
 Run as:		`valvs_bowtie2.sh` 
-Can be given: `-1 Read1 -2 Read2 -r Reference -t threads -m mode`
+Can be given: `-1 Read1 -2 Read2 -r Reference -t threads -m mode -o output`
+### valvs_bwa.sh
+Run as:	`valvs_bwa.sh`
+Can be given: `{-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq} -r ref.fa -t threads -o output`
