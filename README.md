@@ -11,7 +11,11 @@ Authors: Zack Boyd and Richard Orton
 ## **Assemblers**
 #### valvs_bowtie2.sh
 Run as:	`valvs_bowtie2.sh`  
-Can be given: `{(-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq)} -r ref.fa -t threads -m mode -o output`
+Can be given: `{(-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq)} -r ref.fa -t threads -m mode -o output`  
+###### __Example Paired End__
+``` bash
+user@server: valvs_bowtie2.sh -u unpaired.fasta -r ref.fasta -t 15 -m local -o myoutput.txt
+```
 #### valvs_bwa.sh
 Run as:	`valvs_bwa.sh`  
 Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -t threads -o output` 
