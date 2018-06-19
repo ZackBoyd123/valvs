@@ -45,6 +45,8 @@ then
 fi
 if [ -z $OPT_M ] 
 then
+	OPT_M="end-to-end"
+else
 	OPT_M="local"
 fi
 if [ -z $OPT_O ] 
