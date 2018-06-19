@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "valvs_gem"
+echo "valvs_stampy"
 
 FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
