@@ -9,9 +9,13 @@ valvs also incorporates a number of additional scripts to convert the output of 
 
 Authors: Zack Boyd and Richard Orton
 ## **Assemblers**
-### valvs_bowtie2.sh
-Run as:		`valvs_bowtie2.sh` 
-Can be given: `-1 Read1 -2 Read2 -r Reference -t threads -m mode -o output`
-### valvs_bwa.sh
-Run as:	`valvs_bwa.sh`
-Can be given: `{-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq} -r ref.fa -t threads -o output`
+#### valvs_bowtie2.sh
+Run as:	`valvs_bowtie2.sh`  
+Can be given: `{(-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq)} -r ref.fa -t threads -m mode -o output`
+#### valvs_bwa.sh
+Run as:	`valvs_bwa.sh`  
+Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -t threads -o output` 
+#### valvs_tanoti.sh
+Run as:	`valvs_tanoti.sh`  
+Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -o output`  
+
