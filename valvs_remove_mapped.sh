@@ -19,6 +19,11 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-t]\tNumber of Threads to Use\n"
+	printf "\n----------------------------------------\n"
+        printf "Remove all mapped reads in a BAM file. Unlike
+extract mapped, this script doesn't produce a new file(s) with
+the mapped reads"
+        printf "\n----------------------------------------\n"
         exit 1
 
 fi

@@ -25,6 +25,11 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-e]\tOnly assembly? y\n"
+ printf "\n----------------------------------------\n"
+        printf "Use spades to perform a de-novo assembly
+of the reads. Both paired and unpaired fastqs are supported"
+        printf "\n----------------------------------------\n"
+
         exit 1
 
 fi

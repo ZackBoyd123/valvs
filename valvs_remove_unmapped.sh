@@ -19,6 +19,11 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-t]\tNumber of Threads to Use\n"
+	 printf "\n----------------------------------------\n"
+        printf "Convert a SAM file to a BAM file, then index it."
+        printf "\n----------------------------------------\n"
+
+
         exit 1
 
 fi

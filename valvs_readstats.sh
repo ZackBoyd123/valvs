@@ -21,6 +21,10 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n"
+	printf "\n----------------------------------------\n"
+        printf "Get the total number of reads present in a
+paired or single end fastq file(s)."
+        printf "\n----------------------------------------\n"
         exit 1
 
 fi

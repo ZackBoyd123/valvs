@@ -21,6 +21,10 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-1]\tName Of First New Fastq File\n\t[-2]\tName Of Second New Fastq File\n"
+	printf "\n----------------------------------------\n"
+        printf "Extract mapped reads from a BAM file.
+Two new fastq files will be produced."
+        printf "\n----------------------------------------\n"
         exit 1
 
 fi

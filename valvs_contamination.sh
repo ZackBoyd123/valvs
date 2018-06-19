@@ -23,6 +23,10 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-k]\tKeep contamination BAM? y\n\t[-o]\tOutput File Name\n"
+	printf "\n----------------------------------------\n"
+        printf "Maps reads to a reference contamination DB
+using bowtie2, supports paired and unpaired reads."
+        printf "\n----------------------------------------\n"
         exit 1
 fi
 

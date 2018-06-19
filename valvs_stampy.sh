@@ -23,6 +23,11 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-r]\tReference file\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-t]\tThreads\n\t[-o]\tOutput File Name\n"
+	printf "\n----------------------------------------\n"
+        printf "Map reads to a reference genome using stampy.
+currently only paired end reads are supported."
+        printf "\n----------------------------------------\n"
+
         exit 1
 
 fi

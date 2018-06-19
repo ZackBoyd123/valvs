@@ -21,6 +21,10 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-m]\tInput Mpileup File\n\t[-q]\tMinimum Average Quality\n\t[-f]\tMinimum Variant Frequency\n"
+	printf "\n----------------------------------------\n"
+        printf "Run the varscan variant caller."
+        printf "\n----------------------------------------\n"
+
         exit 1
 
 fi

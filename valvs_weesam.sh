@@ -18,6 +18,11 @@ done
 if [[ $1 = "-h" ]]
 then
 	printf "\t----${0##*/}----\n\t[-b]\tInput BAM file\n\t[-o]\tOutput file name.\n"
+	printf "\n----------------------------------------\n"
+        printf "Run weeSAM to visualise alignment, and get
+alignment stats."
+        printf "\n----------------------------------------\n"
+
 	exit 1
 fi
 

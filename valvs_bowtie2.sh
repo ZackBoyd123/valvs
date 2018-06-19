@@ -31,6 +31,12 @@ done
 if [[ $1 = "-h" ]]
 then
 	printf "\t----${0##*/}----\n\t[-r]\tReference file\n\t[-1]\tFirst Input Fastq File\n\t[-2]\tSecond Input Fastq File\n\t[-t]\tThreads\n\t[-m]\tAlignment Mode\n\t[-o]\tOutputStub\n"
+	printf "\n----------------------------------------\n"
+        printf "Maps reads to a reference using bowtie2 both
+paired and unpaired reads are supported aswell
+as different bowtie alignment modes."
+        printf "\n----------------------------------------\n"
+
 	exit 1
 
 fi

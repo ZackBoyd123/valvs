@@ -19,6 +19,10 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-r]\tRefence File\n"
+	printf "\n----------------------------------------\n"
+        printf "Generate an mpileup file given a BAM and 
+reference file."
+        printf "\n----------------------------------------\n"
         exit 1
 
 fi

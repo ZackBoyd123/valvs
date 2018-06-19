@@ -17,6 +17,10 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n"
+	printf "\n----------------------------------------\n"
+	printf "A script to get statistics from a BAM file"
+        printf "\n----------------------------------------\n"
+
         exit 1
 
 fi

@@ -29,6 +29,10 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-q]\tQuality Score\n\t[-l]\tLength\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-l]\n"
+	printf "\n----------------------------------------\n"
+        printf "Trim paired or single end reads using trim_galore"
+        printf "\n----------------------------------------\n"
+
         exit 1
 
 fi

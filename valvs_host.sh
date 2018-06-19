@@ -25,6 +25,11 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-1]\tName Of First Fastq File\n\t[-2]\tName Of Second Fastq File\n\t[-r]\tReference File\n\t[-o]\tOutput File Name\n\t[-k]\t Keep Old Files? y\n"
+	printf "\n----------------------------------------\n"
+        printf "Maps reads to a host DB  using bowtie2 both
+paired and unpaired reads are supported aswell
+as different bowtie alignment modes."
+        printf "\n----------------------------------------\n"
         exit 1
 
 fi

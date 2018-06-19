@@ -21,6 +21,9 @@ done
 if [[ $1 = "-h" ]]
 then
         printf "\t----${0##*/}----\n\t[-b]\tInput BAM File\n\t[-r]\tReference File\n\t[-o]\tOutput File Name\n"
+	printf "\n----------------------------------------\n"
+        printf "Run diversitools on the supplied BAM file."
+        printf "\n----------------------------------------\n"
         exit 1
 
 fi
