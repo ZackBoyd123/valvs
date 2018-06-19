@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 import sys
 import random
 import csv
@@ -12,11 +12,21 @@ parser.add_argument("--input",help="Input converted diversitools entropy file. U
 parser.add_argument("--fasta",help="Input fasta file to analyse.",required=True)
 parser.add_argument("--bases",help="How many bases to analyse in the for/rev direction",required=True)
 parser.add_argument("--output",help="What to call the output file",required=True)
+parser.add_argument("--rfriendly",help="Give me my output in a R format")
+parser.add_argument("--combine", help="Combine for/rev mutations into one")
 args = parser.parse_args()
 
 #'''
 #Input variables from command line
 #'''
+if args.rfriendly == None:
+    rfriendly = False
+else:
+    rfriendly = True
+if args.combine == None:
+    combine = False
+else:
+    combine = True
 mutation_file = args.input
 fasta_file = args.fasta
 bases_to_check = int(args.bases)
@@ -85,7 +95,7 @@ fasta_seq = fasta_seq.upper()
 # '''
 # Write to a file the mutation, where it occurs and the bases before and after the mutation, set by the user.
 # '''
-sys.stdout = open(out_file+"_raw","w")
+sys.stdout = open(out_file+"_raw.txt","w")
 total_mutations = 0
 print("Position"+"\t"+"Reference"+"\t"+"Alternate"+"\t"+str(bases_to_check)+"_Before"+"\t"+str(bases_to_check)+"_After"
       +"\t"+"Alt_Forward"+"\t"+"Alt_Reverse")
@@ -96,7 +106,7 @@ for i,j,x in zip(mut_position,alt_allele,dp_stats):
 
 sys.stdout.close()
 sys.stdout = sys.__stdout__
-sys.stdout = open(out_file+"_calculations","w")
+sys.stdout = open(out_file+"_calculations.txt","w")
 forward_bases = []
 forward_bases_occurence = []
 reverse_bases = []
@@ -106,7 +116,7 @@ reverse_bases_occurence = []
 # Open the previously created file and pull out the before and after bases
 # Give forward and reverse a seperate variable.
 # '''
-with open(out_file+"_raw") as f:
+with open(out_file+"_raw.txt") as f:
     data = csv.reader(f, delimiter="\t")
     next(data, None)
     for line in data:
@@ -142,7 +152,7 @@ reverse_complement = ["".join(i) for i in reverse_complement]
 # '''
 def make_dictionaries(l,l2):
     a = "ACGTN"
-    all_trinuc = ["".join(i) for i in itertools.product(a, repeat=3)]
+    all_trinuc = ["".join(i) for i in itertools.product(a, repeat=bases_to_check)]
     trinuc_values = []
     for i in range(len(all_trinuc)):
         j = 0
@@ -150,17 +160,11 @@ def make_dictionaries(l,l2):
 
     trinuc_dict = dict(zip(all_trinuc,trinuc_values))
     for i, j in zip(l,l2):
-        if bases_to_check == 3:
-            trinuc_dict[i] += int(j)
-        else:
-            trinucleotide = split(i,3,1)
-            for x in trinucleotide:
-                trinuc_dict[x] += int(j)
-
+        trinuc_dict[i] += int(j)
     return trinuc_dict
 
 
-
+dataset= mutation_file.split(".")[0] 
 # '''
 # Order the dictionaries by value, from lowest to highest
 # '''
@@ -174,17 +178,20 @@ reverse_dict = OrderedDict(sorted(reverse_dict.items(), key=lambda x: x[1]))
 forward_bases_occurence = [int(i) for i in forward_bases_occurence]
 reverse_bases_occurence = [int(i) for i in reverse_bases_occurence]
 total_mutations = (sum(forward_bases_occurence)) + sum(reverse_bases_occurence)
-print("Total mutations:\t"+str(total_mutations) )
-print("You set the down/up stream bases to check at:\t"+str(bases_to_check)+"\t"+"Meaning we're looking at:\t"+
-      str(int(bases_to_check - 2))+"\t"+"trinucleotides up/down stream")
-print("Here's what the string and mutation may look like.")
-rand = "ACGT"
-for en, i in enumerate(range(0,bases_to_check)):
-    print(random.choice(rand),end="")
-    if en > 1:
-        print("|",end="")
+if not rfriendly:
+    print("Total mutations:\t"+str(total_mutations) )
+    print("You set the down/up stream bases to check at:\t"+str(bases_to_check)+"\t"+"Meaning we're looking at:\t"+
+          str(int(bases_to_check - 2))+"\t"+"trinucleotides up/down stream")
+    print("Here's what the string and mutation may look like.")
+    rand = "ACGT"
+    for en, i in enumerate(range(0,bases_to_check)):
+        print(random.choice(rand),end="")
+        if en > 1:
+            print("|",end="")
 
-print("\tM")
+    print("\tM")
+if rfriendly:
+    print("Motif\t"+"Percent\t"+"Raw\t"+"Direction\t"+"DataSet")
 # #'''
 # # Get the percentages of what trinucleotides the mutation occurs after / before and print to screen.
 # #'''
@@ -193,11 +200,16 @@ if len(forward_bases) >= 1:
     aa_percent = 0
     cc_percent = 0
     tt_percent = 0
-    print("\n"+"For all:"+"\t"+str(sum(forward_bases_occurence))+"\t"+"Mutations in the forward direction\n"+
-          "Here's the percentage of those mutations which happen after the corresponding trinucleotide\n")
+    if not rfriendly:
+        print("\n"+"For all:"+"\t"+str(sum(forward_bases_occurence))+"\t"+"Mutations in the forward direction\n"+
+              "Here's the percentage of those mutations which happen after the corresponding trinucleotide\n")
     for en, i in enumerate(reversed(forward_dict)):
-        print(str(i) + "\t" + str(int(forward_dict[i]) / int(sum(forward_bases_occurence)) * 100) +
-              "\t" + str(forward_dict[i]))
+        if combine:
+            print(str(i) + "\t" + str(int(forward_dict[i]) / int(total_mutations) * 100) +
+                  "\t" + str(forward_dict[i])+"\t"+"Combine\t"+str(dataset))
+        else:
+            print(str(i) + "\t" + str(int(forward_dict[i]) / int(sum(forward_bases_occurence)) * 100) +
+                  "\t" + str(forward_dict[i])+"\t"+"Forward\t"+str(dataset))
         if i.endswith("GG"):
             gg_percent += int(forward_dict[i])/ int(sum(forward_bases_occurence)) * 100
         elif i.endswith("AA"):
@@ -206,7 +218,7 @@ if len(forward_bases) >= 1:
             cc_percent += int(forward_dict[i])/ int(sum(forward_bases_occurence)) * 100
         elif i.endswith("TT"):
             tt_percent += int(forward_dict[i])/ int(sum(forward_bases_occurence)) * 100
-    if bases_to_check == 3:
+    if not rfriendly:
         print("\n"+"Mutations which came directly after a trinucleotide ending in GG:\t"+str(gg_percent))
         print("Mutations which came directly after a trinucleotide ending in AA:\t"+str(aa_percent))
         print("Mutations which came directly after a trinucleotide ending in CC:\t"+str(cc_percent))
@@ -219,10 +231,15 @@ if len(reverse_bases) >= 1:
     aa_percent_rev = 0
     cc_percent_rev = 0
     tt_percent_rev = 0
-    print("\n\nFor all:"+"\t"+str(sum(reverse_bases_occurence))+"\t"+"Mutations in the reverse direction\n")
+    if not rfriendly:
+        print("\n\nFor all:"+"\t"+str(sum(reverse_bases_occurence))+"\t"+"Mutations in the reverse direction\n")
     for en, i in enumerate(reversed(reverse_dict)):
-        print(str(i)+"\t"+str(int(reverse_dict[i])/ int(sum(reverse_bases_occurence)) *100) +"\t"
-              + str(reverse_dict[i]))
+        if combine:
+            print(str(i)+"\t"+str(int(reverse_dict[i])/ int(total_mutations) *100) +"\t"
+                  + str(reverse_dict[i])+"\t"+"Combine\t"+str(dataset))
+        else:
+            print(str(i)+"\t"+str(int(reverse_dict[i])/ int(sum(reverse_bases_occurence)) *100) +"\t"
+                  + str(reverse_dict[i])+"\t"+"Reverse\t"+str(dataset))
         if i.endswith("GG"):
             gg_percent_rev += int(reverse_dict[i]) / int(sum(reverse_bases_occurence)) * 100
         elif i.endswith("AA"):
@@ -231,7 +248,7 @@ if len(reverse_bases) >= 1:
             cc_percent_rev += int(reverse_dict[i]) / int(sum(reverse_bases_occurence)) * 100
         elif i.endswith("TT"):
             tt_percent_rev += int(reverse_dict[i]) / int(sum(reverse_bases_occurence)) * 100
-    if bases_to_check == 3:
+    if not rfriendly:
         print("\n" + "Mutations which came directly after a trinucleotide ending in GG:\t" + str(gg_percent_rev))
         print("Mutations which came directly after a trinucleotide ending in AA:\t" + str(aa_percent_rev))
         print("Mutations which came directly after a trinucleotide ending in CC:\t" + str(cc_percent_rev))
