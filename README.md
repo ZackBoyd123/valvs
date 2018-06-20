@@ -8,25 +8,77 @@ This is combined with an evaluation of the different reference aligners (BWA, Bo
 valvs also incorporates a number of additional scripts to convert the output of variant callers (VPhaser, DiversiTools, VarScan) into a standard VCF format, as well as scripts for comparing the mutations present in two samples (such as duplicates/replicates) and identifying common motifs around mutations.
 
 Authors: Zack Boyd and Richard Orton
-## **Assemblers**
+<details>  
+<summary>Click to view assembler examples</summary> <p>  
+
+ ## **Assemblers**  
 #### valvs_bowtie2.sh
-Run as:	`valvs_bowtie2.sh`  
+------
+**Run as:**	`valvs_bowtie2.sh`  
 Can be given: `{(-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq)} -r ref.fa -t threads -m mode -o output`  
 ###### _Example Paired End_
 ``` bash
 user@server: valvs_bowtie2.sh -1 paired1.fq -2 paired2.fq -r ref.fasta -t 15 -m local -o myoutput
 ```
+------
 #### valvs_bwa.sh
-Run as:	`valvs_bwa.sh`  
+------
+**Run as:**	`valvs_bwa.sh`  
 Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -t threads -o output`  
-###### _Example Paired End_
+###### _Example Unpaired_
 ``` bash
 user@server: valvs_bwa.sh -u unpaired.fastq -r ref.fasta -t 6 -o bwa_out
 ```
+------
 #### valvs_tanoti.sh
-Run as:	`valvs_tanoti.sh`  
-###### _Example Paired End_
+------
+**Run as:**	`valvs_tanoti.sh`  
 Can be given: `({-1 Read1.fq -2 Read2.fq} OR {-u unpaired.fq}) -r ref.fa -o output`  
+###### _Example Paired End_
 ``` bash
-user@server: valvs_tanoti.sh -1 paired1.fq -2 paired2.fq -r ref.fa -o tanoti_out
+user@server: valvs_tanoti.sh -1 paired1.fq -2 paired2.fq -r ref.fa -o tanoti_out 
+```   
+------
+#### valvs_stampy.sh  
+------
+**Run as:** `valvs_stampy.sh` 
+###### _Example with command line inputs._
+``` bash
+user@server: valvs_stampy.sh -1 paired1.fq -2 paired.fq -r ref.fa -o output
+```  
+------
+#### valvs_gem.sh  
+------
+**Run as:** `valvs_gem.sh`  
+###### _Example with command line inputs._
+``` bash
+user@server: valvs_gem -1 paired.fq -2 paired.fq -r ref.fa -o output
 ```
+
+</p></details>  
+<details>
+  <summary>Click to view variant caller examples</summary> <p>  
+  
+  ## Variant Callers  
+  #### valvs_vphaser.sh  
+  ------ 
+  
+  **Run as:** `valvs_vphaser.sh`  
+  Can be given: `-b bamfile` 
+  ###### _Example_  
+  ``` bash
+  user@server: valvs_vphaser.sh -b file.bam
+  ``` 
+  ------
+  #### valvs_lofreq.sh 
+  ------
+  **Run as:** `valvs_lofreq.sh`  
+  Can be given: `-b bamfile -r ref.fa`  
+  ###### _Example_  
+  ```bash 
+  user@server: valvs_lofreq.sh -b file.bam -r ref.fa
+  ```  
+  _n.b: output file is always your bam file with the .bam removed and .vcf added_
+  
+  
+  </p></details>
