@@ -17,11 +17,13 @@ done
 
 if [[ $1 = "-h" ]]
 then
+	printf "valvs_weesam.sh runs weeSAM on a BAM file to generate a coverage statistics file (txt) and coverage plot (pdf)\n"
+	printf "By default valvs_weesam.sh will look for folderName.bam and generate folderName_weesam.txt and folderName_weesam.pdf\n"
+	printf "However, these can be overrideen using the -b flag to specify an input BAM file and -o flag to specity and OutputStub filename (OutputStub_weesam.txt and OutputStub_pdf.txt will be created)\n"
+	printf "\n----------------------------------------\n"
+	printf "Usage:"
 	printf "\t----${0##*/}----\n\t[-b]\tInput BAM file\n\t[-o]\tOutput file name.\n"
 	printf "\n----------------------------------------\n"
-        printf "Run weeSAM to visualise alignment, and get
-alignment stats."
-        printf "\n----------------------------------------\n"
 
 	exit 1
 fi
