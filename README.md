@@ -26,7 +26,7 @@ Authors: Zack Boyd and Richard Orton
  #### valvs_motifs.py  
  ------  
  A script which analyses mutations, specifically what effect up and downstream bases have on the number of mutations occuring. 
- The user has the ability to choose how many bases are considered. Data is outputted in a format needed by the Motif_Heatmap.r script.  
+ The user has the ability to choose how many bases are considered. The "\_raw" file shows the bases before and after each mutation in the file.The "\_calculation" file contains information on the total number of mutations occuring after user set bases, this value is also represented as a % of total number of mutations in the forward or reverse strand. Data is outputted in a format needed by the Motif_Heatmap.r script.  
  ```
  valvs_motify.py --fasta file.fa --bases 2 --input in.txt --output out.txt --rfriendly yes 
  ```  
