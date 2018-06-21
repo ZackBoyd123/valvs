@@ -17,15 +17,16 @@ done
 
 if [[ $1 = "-h" ]]
 then
-	printf "valvs_weesam.sh runs weeSAM on a BAM file to generate a coverage statistics file (txt) and coverage plot (pdf)\n"
-	printf "By default valvs_weesam.sh will look for folderName.bam and generate folderName_weesam.txt and folderName_weesam.pdf\n"
-	printf "However, these can be overrideen using the -b flag to specify an input BAM file and -o flag to specity and OutputStub filename (OutputStub_weesam.txt and OutputStub_pdf.txt will be created)\n"
 	printf "\n----------------------------------------\n"
 	printf "\t----${0##*/}----\n"
-	printf "Usage (within valvs): valvs_weesam.sh\n"
-	printf "Usage (outwith valvs): valvs_weesam.sh -b my.bam -o name\n"
-	printf "\t[-b]\tInput BAM file [default is FolderName.bam]\n"
-	printf "\t[-o]\tOutput file name [default is FolderName].\n"
+	printf "\tThis script runs weeSAM on a BAM file to generate a coverage statistics file (txt) and a coverage plot (pdf)\n"
+	printf "\n"
+	printf "\tUsage (within valvs): valvs_weesam.sh\n"
+	printf "Opens $FolderName.bam and generate $FolderName_weesam.txt and $FolderName_weesam.pdf\n"
+	printf "\n"
+	printf "\tUsage (outwith valvs): valvs_weesam.sh -b my.bam -o stub\n"
+	printf "\t[-b]\tInput BAM file\n"
+	printf "\t[-o]\tOutput stub for files [stub_weesam.txt and stub_weesam.pdf files created]\n"
 	printf "\n----------------------------------------\n"
 
 	exit 1
