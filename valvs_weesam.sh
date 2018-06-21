@@ -22,7 +22,7 @@ then
 	printf "\tThis script runs weeSAM on a BAM file to generate a coverage statistics file (txt) and a coverage plot (pdf)\n"
 	printf "\n"
 	printf "\tUsage (within valvs): valvs_weesam.sh\n"
-	printf "Opens $FolderName.bam and generate $FolderName_weesam.txt and $FolderName_weesam.pdf\n"
+	printf "\tOpens FolderName.bam and generate FolderName_weesam.txt and FolderName_weesam.pdf\n"
 	printf "\n"
 	printf "\tUsage (outwith valvs): valvs_weesam.sh -b my.bam -o stub\n"
 	printf "\t[-b]\tInput BAM file\n"
