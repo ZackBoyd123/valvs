@@ -17,17 +17,17 @@ done
 
 if [[ $1 = "-h" ]]
 then
-	printf "\n----------------------------------------\n"
+	printf "----------------------------------------\n"
 	printf "\t----${0##*/}----\n"
 	printf "\tThis script runs weeSAM on a BAM file to generate a coverage statistics file (txt) and a coverage plot (pdf)\n"
 	printf "\n"
 	printf "\tUsage (within valvs): valvs_weesam.sh\n"
-	printf "\tOpens FolderName.bam and generate FolderName_weesam.txt and FolderName_weesam.pdf\n"
+	printf "\tOpens FolderName.bam and generates FolderName_weesam.txt and FolderName_weesam.pdf\n"
 	printf "\n"
 	printf "\tUsage (outwith valvs): valvs_weesam.sh -b my.bam -o stub\n"
 	printf "\t[-b]\tInput BAM file\n"
 	printf "\t[-o]\tOutput stub for files [stub_weesam.txt and stub_weesam.pdf files created]\n"
-	printf "\n----------------------------------------\n"
+	printf "----------------------------------------\n"
 
 	exit 1
 fi
