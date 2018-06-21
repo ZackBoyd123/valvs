@@ -17,7 +17,7 @@ done
 
 if [[ $1 = "-h" ]]
 then
-	printf "----------------------------------------\n"
+	printf "\n----------------------------------------\n"
 	printf "\t----${0##*/}----\n"
 	printf "\tThis script runs weeSAM on a BAM file to generate a coverage statistics file (txt) and a coverage plot (pdf)\n"
 	printf "\n"
@@ -27,7 +27,7 @@ then
 	printf "\tUsage (outwith valvs): valvs_weesam.sh -b my.bam -o stub\n"
 	printf "\t[-b]\tInput BAM file\n"
 	printf "\t[-o]\tOutput stub for files [stub_weesam.txt and stub_weesam.pdf files created]\n"
-	printf "----------------------------------------\n"
+	printf "\n----------------------------------------\n"
 
 	exit 1
 fi
