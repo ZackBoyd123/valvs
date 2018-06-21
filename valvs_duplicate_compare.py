@@ -65,12 +65,31 @@ af_file_two = read_file(file2)[1]
 
 dictionary_file1 = dict(zip(location_file_one,af_file_one))
 dictionary_file2 = dict(zip(location_file_two,af_file_two))
+#'''
+#Going to loop through the second dict to get values 1 < i < 10 and values > 10.
+#I loop through the first one a couple of lines later
+#'''
+file_2_one = 0
+file_2_ten = 0
+for i in dictionary_file2:
+    if 0.01 <= dictionary_file2[i] < 0.1:
+        file_2_one += 1
+    if dictionary_file2[i] >= 0.1:
+        file_2_ten += 1
+
 unique_dict1 = copy.deepcopy(dictionary_file1)
 unique_dict2 = copy.deepcopy(dictionary_file2)
 array_1 = []
 array_2 = []
 shared_array = []
+file_1_one = 0
+file_1_ten = 0
 for i in dictionary_file1:
+    if 0.01 <= dictionary_file1[i] < 0.1:
+        file_1_one += 1
+    if dictionary_file1[i] >= 0.1:
+        file_1_ten += 1
+
     if i in dictionary_file2:
         print(str(i)+","+str(dictionary_file1[i])+","+str(dictionary_file2[i])+","+"Shared"+","+str(sample))
         array_1.append(dictionary_file1[i])
@@ -78,6 +97,20 @@ for i in dictionary_file1:
         shared_array.append(dictionary_file2[i])
         del unique_dict1[i]
         del unique_dict2[i]
+
+mishared_file1_one = 0
+mishared_file1_ten = 0
+mishared_file2_ten = 0
+mishared_file2_one = 0
+for i, j in zip(array_1,array_2):
+    if i >= 0.1 and j<0.1:
+        mishared_file1_ten += 1
+    elif i >= 0.01 and j<0.01:
+        mishared_file1_one += 1
+    elif j >= 0.1 and i<0.1:
+        mishared_file2_ten += 1
+    elif j >= 0.01 and i<0.01:
+        mishared_file2_one += 1
 
 for i in unique_dict1:
     print(str(i)+","+str(dictionary_file1[i])+","+"0"+","+"file_1"+","+str(sample))
@@ -93,32 +126,32 @@ for i in unique_dict2:
 sys.stdout.close()
 sys.stdout = sys.__stdout__
 sys.stdout = open(str(sample)+"_stats.txt","w")
-#af_ranked1 = stats.rankdata(array_1)
-#af_ranked2 = stats.rankdata(array_2)
-# data_frame = pandas.DataFrame({"Allele_1": array_1, "Allele_2": array_2})
-# data_frame.sort_values(by=["Allele_1"])
-# data_frame["Rank"] = data_frame["Allele_1"].rank(ascending=True)
-# data_frame.sort_values(by=["Allele_2"])
-# data_frame["Rank_Allele_2"] = data_frame["Allele_2"].rank(ascending=True)
-# print(data_frame.corr(method="spearman"))
-
-# Tot num of snps, file 1
-print("Legend"+","+"File_One_Unique"+","+str(len(unique_dict1))+","+"Legend"+","+str(sample))
-# Tot num of snps, file 2
-print("Legend"+","+"File_Two_Unique"+","+str(len(unique_dict2))+","+"Legend"+","+str(sample))
-# shared SNPs
-print("Legend"+","+"Shared_SNPs"+str(len(shared_array))+","+"Legend"+","+str(sample))
 
 #Get sum of squared score
 sum_of_squares = []
 for a, b in zip(array_1, array_2):
     sum_of_squares.append(math.sqrt((a-b)**2))
-print("Legend"+","+"Sum_of_Squares"+","+str(sum(sum_of_squares))+","+"Legend"+","+str(sample))
 
-# Spearman stats
+#'''
+#The print statements which will go into the .stat file.
+#'''
+print("======\t"+file1+"\t======")
+print("\tTotal SNPs:\t"+str(len(dictionary_file1)))
+print("\tUnique SNPs:\t"+str(len(unique_dict1))+"\n")
+print("\tGreater than or equal to 10%:\t"+str(file_2_ten))
+print("\tGreater than 1% less than 10%:\t"+str(file_2_one)+"\n")
+print("\tMishared 10% SNPs:\t"+str(mishared_file1_ten))
+print("\tMishared 1% SNPs:\t"+str(mishared_file1_one)+"\n")
+print("======\t"+file2+"\t======")
+print("\tTotal SNPs:\t"+str(len(dictionary_file2)))
+print("\tUnique SNPs:\t"+str(len(unique_dict2))+"\n")
+print("\tGreater than or equal to 10%:\t"+str(file_2_ten))
+print("\tGreater than 1% less than 10%:\t"+str(file_2_one)+"\n")
+print("\tMishared 10% SNPs:\t"+str(mishared_file2_ten))
+print("\tMishared 1% SNPs:\t"+str(mishared_file2_one)+"\n")
+
+print("SNPs shared between two files:\t"+str(len(shared_array)))
+print("Sum of squares score beteen two file:\t"+str(sum(sum_of_squares)))
 x = (stats.spearmanr(array_1,array_2))
-print("Legend"+","+"Spearman_Correlation"+","+str(x[0])+","+"Legend"+","+str(sample))
-print("Legend"+","+"Spearman_P-value"+","+str(x[1])+","+"Legend"+","+str(sample))
-#print(x)
-#####
-
+print("Spearmans Correlation value:\t"+str(x[0]))
+print("Spearmans P-value:\t"+str(x[1]))
