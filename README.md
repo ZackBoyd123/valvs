@@ -15,18 +15,18 @@ Authors: Zack Boyd and Richard Orton
  
  #### valvs_duplicate_compare.py  
  ------  
- A script which takes two converted VCF files, finds unique and non-unique SNPs between them and their corresponding allele frequencies. This data is output in a format to be used by the Compare_duplicate.r script.  
+ A script which takes two converted VCF files, finds unique and non-unique SNPs between them and their corresponding allele frequencies. This data is output in a format used by the Compare_duplicate.r script.  
  ``` 
  valvs_duplicate_compare.py --first input_1 --second input_2 --sample unique
  ``` 
  Both ``--first`` & ``--second`` require VCF files which have been converted by one of the "2VCF.py" scripts.
- The ``--sample`` tag is a unique string used to identify the sample. i.e sample1. This allows you to differentiate between samples in R.  
+ The ``--sample`` tag is a unique string used to identify the sample. i.e sample1. This allows you to differentiate between samples in the Comapre_duplicate.r script.  
  
  ------   
  #### valvs_motifs.py  
  ------  
- A script which analyses mutations, specifically what effect up and downstream bases have on the number of mutations occuring. 
- The user has the ability to choose how many bases are considered. The "\_raw" file shows the bases before and after each mutation in the file.The "\_calculation" file contains information on the total number of mutations occuring after user set bases, this value is also represented as a % of total number of mutations in the forward or reverse strand. Data is outputted in a format needed by the Motif_Heatmap.r script.  
+ A script which analyses mutations, specifically the effect that up and downstream bases have on the number of mutations occuring. 
+ The user has the ability to choose how many bases are considered. The "\_raw" file shows the bases before and after each mutation in the file.The "\_calculation" file contains information on the total number of mutations occuring after user set bases, this value is also represented as a % of total number of mutations in the forward or reverse strand. Data is outputted in a format used by the Motif_Heatmap.r script.  
  ```
  valvs_motify.py --fasta file.fa --bases 2 --input in.txt --output out.txt --rfriendly yes 
  ```  
