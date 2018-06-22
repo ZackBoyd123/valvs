@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import csv
 import sys
 
@@ -10,7 +11,7 @@ with open(fileIn) as file:
     next(data, None)    # SKIPS HEADER
 
     orig_stdout = sys.stdout
-    sys.stdout = open(fileO+"_raw.txt", "w")
+    sys.stdout = open(fileO+"_converted_SNPs.txt", "w")
 
 
     #Coverage counters

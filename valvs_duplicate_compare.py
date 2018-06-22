@@ -102,7 +102,14 @@ mishared_file1_one = 0
 mishared_file1_ten = 0
 mishared_file2_ten = 0
 mishared_file2_one = 0
+shared_one = 0
+shared_ten = 0
+
 for i, j in zip(array_1,array_2):
+    if 0.01 <= i < 0.1 and 0.01 <= j < 0.1:
+        shared_one += 1
+    elif i >= 0.1 and j >= 0.1:
+        shared_ten += 1
     if i >= 0.1 and j<0.1:
         mishared_file1_ten += 1
     elif i >= 0.01 and j<0.01:
@@ -112,11 +119,27 @@ for i, j in zip(array_1,array_2):
     elif j >= 0.01 and i<0.01:
         mishared_file2_one += 1
 
+unique_file1_ten = 0
+unique_file1_one = 0
+unique_file2_ten = 0
+unique_file2_one = 0
+
 for i in unique_dict1:
+    if dictionary_file1[i] >= 0.1:
+        unique_file1_ten += 1
+    elif 0.01 <= dictionary_file1[i] < 0.1:
+        unique_file1_one += 1
+
     print(str(i)+","+str(dictionary_file1[i])+","+"0"+","+"file_1"+","+str(sample))
     array_1.append(dictionary_file1[i])
     array_2.append(float(0))
+
 for i in unique_dict2:
+    if dictionary_file2[i] >= 0.1:
+        unique_file2_ten += 1
+    elif 0.01 <= dictionary_file2[i] < 0.1:
+        unique_file2_one += 1
+
     print(str(i)+","+"0"+","+str(dictionary_file2[i])+","+"file_2"+","+str(sample))
     array_1.append(float(0))
     array_2.append(dictionary_file2[i])
@@ -135,23 +158,40 @@ for a, b in zip(array_1, array_2):
 #'''
 #The print statements which will go into the .stat file.
 #'''
+
 print("======\t"+file1+"\t======")
 print("\tTotal SNPs:\t"+str(len(dictionary_file1)))
 print("\tUnique SNPs:\t"+str(len(unique_dict1))+"\n")
-print("\tGreater than or equal to 10%:\t"+str(file_2_ten))
-print("\tGreater than 1% less than 10%:\t"+str(file_2_one)+"\n")
+print("\tTotal 10% >:\t"+str(file_2_ten))
+print("\tTotal 1-10%:\t"+str(file_2_one)+"\n")
+print("\tTotal unique 10% >:\t"+str(unique_file1_ten))
+print("\tTotal unique 1-10%:\t"+str(unique_file1_one)+"\n")
 print("\tMishared 10% SNPs:\t"+str(mishared_file1_ten))
 print("\tMishared 1% SNPs:\t"+str(mishared_file1_one)+"\n")
 print("======\t"+file2+"\t======")
 print("\tTotal SNPs:\t"+str(len(dictionary_file2)))
 print("\tUnique SNPs:\t"+str(len(unique_dict2))+"\n")
-print("\tGreater than or equal to 10%:\t"+str(file_2_ten))
-print("\tGreater than 1% less than 10%:\t"+str(file_2_one)+"\n")
+print("\tTotal 10% >:\t"+str(file_2_ten))
+print("\tTotal 1-10%:\t"+str(file_2_one)+"\n")
+print("\tTotal unique 10% >:\t"+str(unique_file2_ten))
+print("\tTotal unique 1-10%:\t"+str(unique_file2_one)+"\n")
 print("\tMishared 10% SNPs:\t"+str(mishared_file2_ten))
-print("\tMishared 1% SNPs:\t"+str(mishared_file2_one)+"\n")
+print("\tMishared 1% SNPs:\t"+str(mishared_file2_one)+"\n\n"+"=======",end="\t")
+for i in file1:
+    print("=",end="")
+print("\t======")
 
 print("SNPs shared between two files:\t"+str(len(shared_array)))
+print("Shared 10%> SNPs:\t"+str(shared_ten))
+print("Shared 1-10% SNPs:\t"+str(shared_one)+"\n")
+print("Unshared SNPs:\t"+str(int(len(dictionary_file1)-int(len(shared_array)))
+                             + int(len(dictionary_file2)) -int(len(shared_array)))+"\n")
+print("Total unshared 10% SNPs:\t"+str(int(unique_file1_ten)+int(unique_file2_ten)))
+print("Total unshared 1-10% SNPs:\t"+str(int(unique_file1_one)+int(unique_file2_one))+"\n")
+print("Total mishared 10% SNPs:\t"+str(int(mishared_file2_ten)+int(mishared_file1_ten)))
+print("Total mishared 1-10% SNPs:\t"+str(int(mishared_file1_one)+int(mishared_file2_one))+"\n")
 print("Sum of squares score beteen two file:\t"+str(sum(sum_of_squares)))
 x = (stats.spearmanr(array_1,array_2))
 print("Spearmans Correlation value:\t"+str(x[0]))
-print("Spearmans P-value:\t"+str(x[1]))
+print("Spearmans P-value:\t"+str(x[1]),end="\n")
+
