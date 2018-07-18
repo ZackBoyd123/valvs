@@ -54,7 +54,7 @@ echo "$(date) $config_version valvs_extract_mapped.sh b=$OPT_B" 1=${OPT_1} 2=${O
 OPT_F=${OPT_B%.bam}
 echo "$OPT_F"
 bam2fastq --force --no-unaligned --aligned -o ${OPT_F}"#.fq" ${OPT_B}
-mv ${OPT_F}_1.fq ${OPT_B%.bam}"_R1_valvs.fq"
-mv ${OPT_F}_2.fq ${OPT_B%.bam}"_R2_valvs.fq"
+mv ${OPT_F}_1.fq $OPT_1
+mv ${OPT_F}_2.fq $OPT_2
 
-valvs_readstats.sh -1 ${OPT_B%.bam}"_R1_valvs.fq" -2 ${OPT_B%.bam}"_R2_valvs.fq"
+valvs_readstats.sh -1 $OPT_1 -2 $OPT_2
