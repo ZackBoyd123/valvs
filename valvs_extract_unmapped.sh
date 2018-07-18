@@ -57,4 +57,4 @@ bam2fastq --force --no-aligned --unaligned -o ${OPT_F}"#.fq" ${OPT_B}
 mv ${OPT_F}_1.fq $OPT_1
 mv ${OPT_F}_2.fq $OPT_2
 
-valvs_readstats.sh
+valvs_readstats.sh -1 $OPT_1 -2 $OPT_2
