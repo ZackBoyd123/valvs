@@ -54,7 +54,7 @@ echo "$(date) $config_version valvs_extract_unmapped.sh b=$OPT_B" 1=${OPT_1} 2=$
 #think bam2fastq can give an issue - if unmapped removed beforehand in BAM - and one of the pairs is remvoed - looks like bam2fastq will maybe still extract the single unpaired??? check??
 OPT_F=${OPT_B%.bam}"_valvs"
 bam2fastq --force --no-aligned --unaligned -o ${OPT_F}"#.fq" ${OPT_B}
-mv ${OPT_F}_1.fq ${OPT_B%.bam}"_R1_valvs.fq"
-mv ${OPT_F}_2.fq ${OPT_B%.bam}"_R2_valvs.fq"
+mv ${OPT_F}_1.fq $OPT_1
+mv ${OPT_F}_2.fq $OPT_2
 
 valvs_readstats.sh
