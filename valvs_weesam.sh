@@ -5,7 +5,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :b:o TEST; do
+while getopts :b:o: TEST; do
 	case $TEST in
 	
 	b) OPT_B=$OPTARG
