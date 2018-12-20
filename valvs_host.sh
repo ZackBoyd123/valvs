@@ -81,7 +81,7 @@ echo "Ref = $OPT_R R1 = $OPT_1 R2 = $OPT_2 OutputStub = $OPT_O"
 echo "$(date) $config_version valvs_host.sh r=$OPT_R o=$OPT_O 1=$OPT_1 2=$OPT_2" >> $LOG
 
 valvs_bowtie2.sh -r $OPT_R -o ${OPT_O} -1 $OPT_1 -2 $OPT_2
-valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2
+valvs_extract_unmapped.sh -o ${OPT_O} -b ${OPT_O}.bam -1 $R1 -2 $R2
 
 if [ -z $OPT_K ]
 then
