@@ -36,7 +36,7 @@ then
 		fi
 	done
 else
-	$ref=${OPT_R}
+	ref=${OPT_R}
 fi
 
 echo "$(date) $config_version valvs_set_ref.sh ref=$ref" >> $LOG
