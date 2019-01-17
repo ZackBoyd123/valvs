@@ -40,7 +40,7 @@ then
 	done
 	rm -f filelist.txt
 else
-	$R1=${OPT_1}
+	R1=${OPT_1}
 fi
 
 if [ -z $OPT_2 ]
@@ -63,7 +63,7 @@ then
 	done
 	rm -f filelist.txt
 else
-	$R2=${OPT_2}
+	R2=${OPT_2}
 fi
 
 if [[ -n $R1 && -n $R2 ]]
