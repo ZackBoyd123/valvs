@@ -6,12 +6,18 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts ::1:2: TEST; do
+while getopts ::1:2:o:c:k: TEST; do
         case $TEST in
         
 	1) OPT_1=$OPTARG
         ;;
         2) OPT_2=$OPTARG
+        ;;
+	o) OPT_O=$OPTARG
+        ;;
+	c) OPT_C=$OPTARG
+        ;;
+	k) OPT_K=$OPTARG
         ;;
         esac
 done
@@ -33,11 +39,30 @@ if [ -z $OPT_2 ]
 then
         OPT_2=${FLD}"_R2_valvs.fq"
 fi
+if [ -z $OPT_0 ]
+then
+        OPT_O=${FLD}
+fi
+if [ -z $OPT_C ]
+then
+        OPT_C=""
+else
+	OPT_C="-derep ${OPT_C}"
+fi
 
-echo "R1 = ${OPT_1} R2 = ${OPT_2}"
-echo "$(date) $config_version valvs_prinseq.sh 1=$OPT_1 2=$OPT_2" >> $LOG
+echo "R1 = ${OPT_1} R2 = ${OPT_2} Dereplication = $OPT_C Output = $OPT_O"
+echo "$(date) $config_version valvs_prinseq.sh 1=$OPT_1 2=$OPT_2 c=$OPT_C" o=$OPT_O >> $LOG
 
-prinseq-lite.pl -lc_method dust -lc_threshold 7 -derep 12345 -fastq ${OPT_1} -fastq2 ${OPT_2} -out_good prinseq_good -out_bad prinseq_bad
+prinseq-lite.pl -lc_method dust -lc_threshold 7 $OPT_C -fastq ${OPT_1} -fastq2 ${OPT_2} -out_good prinseq_good -out_bad prinseq_bad > ${OPT_O}_prinseq.txt 2>&1
+
+if [ -z $OPT_K ]
+then
+	:
+else
+	mkdir -p Reads
+	cp prinseq_good_1.fastq Reads/prinseq_1.fastq
+	cp prinseq_good_2.fastq Reads/prinseq_2.fastq
+fi
 
 mv prinseq_good_1.fastq ${FLD}"_R1_valvs.fq"
 mv prinseq_good_2.fastq ${FLD}"_R2_valvs.fq"
