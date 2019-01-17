@@ -22,12 +22,12 @@ done
 
 if [ -z $OPT_1 ]
 then
-	ls *_R1_*.f*q *_R1.f*q *_1.f*q > filelist.txt 2>/dev/null 
+	ls *_R1_*.f*q *_R1.f*q *_1.f*q *_1_*.f*q > filelist.txt 2>/dev/null 
 	for fastq in `cat filelist.txt`
 	do
 		if [[ $fastq == *_R1_valvs.fq ]]
 		then
-			:
+			echo "valvs R1 fastq file already exists: $fastq, so using"
 		else
 			if [ -z $R1 ]
 			then
@@ -45,19 +45,19 @@ fi
 
 if [ -z $OPT_2 ]
 then
-	ls *_R2_*.f*q *_R2.f*q *_2.f*q > filelist.txt 2>/dev/null
+	ls *_R2_*.f*q *_R2.f*q *_2.f*q *_2_*.f*q> filelist.txt 2>/dev/null
         for fastq in `cat filelist.txt`
 	do
         	if [[ $fastq == *_R2_valvs.fq ]]
         	then
-                	:
+                	echo "valvs R2 fastq file already exists: $fastq, so using"
         	else
                 	if [ -z $R2 ]
                 	then
 				echo "R2 = $fastq"
                         	R2=$fastq
                 	else
-                        	echo "Multiple R2 fastq files exist $fastq,using the 1st one $R2" 
+                        	echo "Multiple R2 fastq files exist $fastq, using the 1st one $R2" 
                 	fi
         	fi
 	done
