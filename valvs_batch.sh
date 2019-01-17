@@ -24,7 +24,7 @@ fi
 echo "V = ${OPT_V}"
 echo "$(date) $config_version valvs_batch.sh v=$OPT_V" >> $LOG
 
-for i in $(ls -d */ | grep -v Undetermined | grep -v SeqDat)
+for i in $(ls -d */ | grep -v Undetermined | grep -v SeqDat | grep -v Refs)
 do 
 	echo $i
 	cd $i
