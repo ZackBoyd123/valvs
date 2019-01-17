@@ -51,9 +51,9 @@ then
 fi
 if [ -z $OPT_M ] 
 then
-	OPT_M="end-to-end"
-else
 	OPT_M="local"
+else
+	OPT_M="end-to-end"
 fi
 if [ -z $OPT_O ] 
 then
@@ -82,7 +82,7 @@ fi
 
 if [ -z $OPT_U ]
 then
-	echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = $OPT_O"
+	echo "Ref = ${OPT_R} R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = $OPT_O Threads = $OPT_T AlignMode = $OPT_M"
 	echo "$(date) $config_version valvs_bowtie2.sh r=$OPT_R 1=$OPT_1 2=$OPT_2 o=$OPT_O t=$OPT_T m=$OPT_M" >> $LOG
 	
 	bowtie2 --"$OPT_M" -p $OPT_T -x $OPT_R -1 $OPT_1 -2 $OPT_2 -S ${OPT_O}.sam
