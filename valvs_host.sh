@@ -84,7 +84,7 @@ then
 fi
 if [ -z $OPT_M ] 
 then
-	OPT_M="local"
+	OPT_M=""
 else
 	OPT_M="end-to-end"
 fi
