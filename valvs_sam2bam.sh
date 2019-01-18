@@ -6,7 +6,7 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :t:s:o: TEST; do
+while getopts :t:s:o:k: TEST; do
 	case $TEST in 
 
 	t) OPT_T=$OPTARG
@@ -14,6 +14,8 @@ while getopts :t:s:o: TEST; do
 	s) OPT_S=$OPTARG
 	;;	
 	o) OPT_O=$OPTARG
+	;;
+	k) OPT_K=$OPTARG
 	;;
 	esac
 done
@@ -49,6 +51,10 @@ echo "SAM = ${OPT_S} BAM = ${OPT_O}"
 echo "$(date) $config_version valvs_sam2bam.sh s=$OPT_S o=$OPT_O" >> $LOG
 
 samtools view -@ $OPT_T -bS $OPT_S | samtools sort -@ $OPT_T -o $OPT_O
-rm -f $OPT_S
+
+if [ -z $OPT_K ]
+then
+	rm -f $OPT_S
+fi
 
 samtools index $OPT_O
