@@ -19,14 +19,14 @@ if [ -z $OPT_U ]
 then
     if [ -e $OPT_1 ] && [ -e $OPT_2 ]
     then
-        #R1 and R2 exist - so they use them
+        #R1 and R2 exist - so will use them
         :
     else
         OPT_U=$FLD"_valvs.fq"
 
         if [ -e $OPT_U ]
         then
-            #R1 and R2 do not exist, Unpaired exists, so use it [aligners will automatically]
+            #R1 and R2 do not exist, unpaired does exist, so use it
             :
         else
             echo "Could not find any read files (paired or unpaired) R1=$OPT_1 R2=$OPT_2 U=$OPT_U, exiting..."
@@ -35,11 +35,11 @@ then
     fi
 fi
 
+#echo "$(date) $config_version valvs_check_reads.sh 1=$OPT_1 2=$OPT_2 U=$OPT_U" 
+
 if [ -z $OPT_U ]
 then
-	:
-	#echo "$(date) $config_version valvs_check_reads.sh 1=$OPT_1 2=$OPT_2" >> $LOG
+	echo "$(date) $config_version valvs_check_reads.sh 1=$OPT_1 2=$OPT_2" >> $LOG
 else
-	:
-        #echo "$(date) $config_version valvs_check_reads.sh u=$OPT_U" >> $LOG
+        echo "$(date) $config_version valvs_check_reads.sh u=$OPT_U" >> $LOG
 fi

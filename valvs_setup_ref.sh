@@ -25,13 +25,14 @@ then
 		then	
 			if [[ $fa == valvs_ref.fa ]]
 			then
-				:		
+				rm -f valvs_ref.fa*
 			elif [ -z $ref ]
 			then
 				echo "ref = $fa"
 				ref=$fa
 			else
-				echo "Multiple ref fasta files exist $fa, using the 1st one $ref"	
+				echo "Multiple ref fasta files exist $fa, using the 1st one $ref"
+				echo "Multiple ref fasta files exist $fa, using the 1st one $ref" >> $LOG
 			fi
 		fi
 	done
@@ -43,9 +44,10 @@ echo "$(date) $config_version valvs_set_ref.sh ref=$ref" >> $LOG
 
 if [[ -n $ref ]]
 then
-	rm -f valvs_ref.fa*
 	ln -s $ref valvs_ref.fa
 	echo "valvs_ref link has been created: valvs_ref.fa -> $ref"
+	echo "valvs_ref link created valvs_ref.fa -> $ref" >> $LOG
 else
 	echo "Could not find a ref fasta file"
+	echo "Could not find a ref fasta file" >> $LOG
 fi

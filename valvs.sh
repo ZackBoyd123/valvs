@@ -14,9 +14,9 @@ while getopts :1:2:r:q:l: TEST; do
 	;;
 	r) OPT_R=$OPTARG
 	;;
-  q) OPT_Q=$OPTARG
+	q) OPT_Q=$OPTARG
 	;;
-  l) OPT_L=$OPTARG
+	l) OPT_L=$OPTARG
 	;;
 	esac
 done

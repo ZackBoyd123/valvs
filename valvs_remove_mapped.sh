@@ -6,13 +6,15 @@ FLD=${PWD##*/}
 LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
-while getopts :b:t: TEST; do
+while getopts :b:t:o: TEST; do
 	case $TEST in
 
 	b) OPT_B=$OPTARG
 	;;
 	t) OPT_T=$OPTARG
 	;;
+        o) OPT_O=$OPTARG
+        ;;
 	esac
 done
 
@@ -38,12 +40,16 @@ if [ -z $OPT_B ]
     then
     OPT_B=${FLD}.bam
 fi
+if [ -z $OPT_O ]
+    then
+    OPT_O=${FLD}.bam
+fi
 
-OPT_O=${OPT_B%.bam}.v2.bam
+TEMP=${OPT_B%.bam}.v2.bam
 
-echo "BAM = ${OPT_B}"
-echo "$(date) $config_version valvs_remove_mapped.sh b=$OPT_B" >> $LOG
+echo "BAM = ${OPT_B} OUTPUT=${OPT_O}"
+echo "$(date) $config_version valvs_remove_mapped.sh b=$OPT_B o=$OPT_O" >> $LOG
 
-samtools view -@ $OPT_T -bh -f 4 $OPT_B | samtools sort -@ $OPT_T -o $OPT_O
-mv $OPT_O $OPT_B
-samtools index ${OPT_B}
+samtools view -@ $OPT_T -bh -f 4 $OPT_B | samtools sort -@ $OPT_T -o $TEMP
+mv $TEMP $OPT_O
+samtools index ${OPT_O}

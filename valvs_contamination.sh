@@ -50,14 +50,15 @@ else
         R2=${OPT_O%.bam}_R2_valvs.fq
 fi
 
-echo "R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O} r = $config_contam_db"
-echo "$(date) $config_version valvs_contamination.sh 1=${OPT_1} 2=${OPT_2} o=${OPT_O} r=$config_contam_db" >> $LOG
+echo "R1 = ${OPT_1} R2 = ${OPT_2} OutputStub = ${OPT_O} r = $config_contam"
+echo "$(date) $config_version valvs_contamination.sh 1=${OPT_1} 2=${OPT_2} o=${OPT_O} r=$config_contam" >> $LOG
 
-valvs_bowtie2.sh -r $config_contam -1 $OPT_1 -2 $OPT_2 -o "$OPT_O.sam"
+valvs_bowtie2.sh -r $config_contam -1 $OPT_1 -2 $OPT_2 -o "$OPT_O"
 samtools idxstats ${OPT_O}.bam >> $LOG
 valvs_extract_unmapped.sh -b ${OPT_O}.bam -1 $R1 -2 $R2
 
 if [ -z $OPT_K ]
+then
 	rm -f ${OPT_O}.bam
 	rm -f ${OPT_O}.bam.bai
 fi

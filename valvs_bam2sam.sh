@@ -7,12 +7,12 @@ LOG="${FLD}_valvs_log.txt"
 touch $LOG
 
 while getopts :t:b:o: TEST; do
-  case $TEST in 
+  case $TEST in
 
 	t) OPT_T=$OPTARG
 	;;
 	b) OPT_B=$OPTARG
-	;;	
+	;;
 	o) OPT_O=$OPTARG
 	;;
 	esac
@@ -26,7 +26,7 @@ fi
 
 . valvs_config.txt
 
-if [ -z $OPT_T ] 
+if [ -z $OPT_T ]
 then
 	OPT_T=$config_threads
 fi
@@ -34,7 +34,7 @@ if [ -z $OPT_B ]
 then
 	OPT_B=${FLD}.bam
 fi
-if [ -z $OPT_O ] 
+if [ -z $OPT_O ]
 then
 	if [ -z $OPT_B ]
 	then
@@ -44,7 +44,7 @@ then
 	fi
 fi
 
-echo "BAM = ${OPT_B} SAM = ${OPT_O}"
-echo "$(date) $config_version valvs_bam2sam.sh b=$OPT_B o=$OPT_O" >> $LOG
+echo "BAM = ${OPT_B} SAM = ${OPT_O}.sam"
+echo "$(date) $config_version valvs_bam2sam.sh b=$OPT_B o=$OPT_O.sam" >> $LOG
 
 samtools view -h $OPT_B > $OPT_O
