@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #IFS=$'\n'
-greater=$(ls | grep .f*a* | grep -v .fastq)
+greater=$(ls | grep '\.f.*a*' | grep -v '\.fastq')
 if $greater -ge 2
 then
 	echo "There is more than one fasta file in the folder - remove the extra seqs"
 	exit 1
 else
 	mkdir Refs
-	for i in $(ls | grep .f*a | grep -v .fastq)
+	for i in $(ls | grep '\.f.*a' | grep -v '\.fastq')
 	do
 		mv $i Refs
 		cd Refs
