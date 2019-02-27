@@ -1,10 +1,12 @@
 #!/bin/bash
 
 #IFS=$'\n'
-greater=$(ls | grep '\.f.*a*' | grep -v '\.fastq')
-if $greater -ge 2
+ls -l | grep '\.f.*a' | grep -v '\.fastq' > reflist.txt
+
+if [[ $(wc -l < reflist.txt) -ge 2 ]]
 then
 	echo "There is more than one fasta file in the folder - remove the extra seqs"
+	rm -f reflist.txt
 	exit 1
 else
 	mkdir Refs
@@ -16,6 +18,8 @@ else
 		cd ..
 	done
 fi
+
+rm -f reflist.txt
 
 mkdir -p SeqDat
 mv *.csv SeqDat 2>/dev/null 
